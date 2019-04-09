@@ -1,0 +1,8 @@
+theme:
+  breakpoints:
+    medium: 70rem
+  spacing:
+    sectionVertical: 20
+  colors:
+    primary:
+      main: '#32329f'
