@@ -152,9 +152,9 @@ program
   .option('--validate', 'Validate spec on each change')
   .action(function(options) {
     const config = api.readConfig();
-    const auth = require('./auth');
+    //const auth = require('./auth');
     const app = express();
-    app.use(auth);
+    //app.use(auth);
     app.use(cors());
 
     app.get('/', api.indexMiddleware);

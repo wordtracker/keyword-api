@@ -10,10 +10,10 @@
   },
   "private": true,
   "scripts": {
-    "start": "swagger-repo serve",
-    "build": "swagger-repo build -o web_deploy",
-    "test": "swagger-repo validate",
-    "gh-pages": "swagger-repo gh-pages"
+    "start": "node ./local_modules/swagger-repo/run.js",
+    "build": "node ./local_modules/swagger-repo/bin/swagger-repo build -o web_deploy",
+    "test": "node ./local_modules/swagger-repo/bin/swagger-repo validate",
+    "gh-pages": "node ./local_modules/swagger-repo/bin/swagger-repo gh-pages"
   },
   "description": "[![Build Status](https://travis-ci.com/wordtracker/keyword-api.svg?branch=master)](https://travis-ci.com/wordtracker/keyword-api) ## Steps to finish",
   "main": "index.js",
