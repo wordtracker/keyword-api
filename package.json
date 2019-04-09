@@ -1,6 +1,6 @@
 {
-  "name": "wordtracker-keyword-api",
-  "version": "1.0.0",
+  "name": "keyword-api",
+  "version": "2.0.0",
   "dependencies": {
     "basic-auth": "^2.0.1",
     "shelljs": "^0.8.3",
@@ -14,5 +14,14 @@
     "build": "node ./local_modules/swagger-repo/bin/swagger-repo build -o web_deploy",
     "test": "node ./local_modules/swagger-repo/bin/swagger-repo validate",
     "gh-pages": "node ./local_modules/swagger-repo/bin/swagger-repo gh-pages"
-  }
+  },
+  "description": "[![Build Status](https://travis-ci.com/wordtracker/keyword-api.svg?branch=master)](https://travis-ci.com/wordtracker/keyword-api) ## Steps to finish",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-wordtracker:wordtracker/keyword-api.git"
+  },
+  "author": "",
+  "license": "ISC"
 }
