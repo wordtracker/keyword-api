@@ -1,0 +1,7 @@
+apiTitle: Wordtracker Keyword API 2.0
+splitSpec: false
+codeSamples: false
+swaggerUI: true
+travis: true
+repo: wordtracker/keyword-api
+oasVersion: 3.0.0
