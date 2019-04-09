@@ -1,5 +1,5 @@
 # Wordtracker Keyword API 2.0 Docs | OpenAPI Specification
-[![Build Status](https://travis-ci.com/wordtracker/wt-api-docs.svg?branch=master)](https://travis-ci.com/wordtracker/wt-api-docs)
+[![Build Status](https://travis-ci.com/wordtracker/keyword-api.svg?branch=master)](https://travis-ci.com/wordtracker/keyword-api)
 ## Steps to finish
 
 1. Enable [Travis](https://docs.travis-ci.com/user/getting-started/#To-get-started-with-Travis-CI%3A) for your repository (**note**: you already have `.travis.yml` file)
@@ -13,9 +13,9 @@
 
 ## Links
 
-- [Reference Documentation (ReDoc)](https://wordtracker.github.io/wt-api-docs/)
-- [SwaggerUI](https://wordtracker.github.io/wt-api-docs/swagger-ui/)
-- OpenAPI Raw Files: [JSON](https://wordtracker.github.io/wt-api-docs/openapi.json) [YAML](https://wordtracker.github.io/wt-api-docs/openapi.yaml)
+- [Reference Documentation (ReDoc)](https://wordtracker.github.io/keyword-api/)
+- [SwaggerUI](https://wordtracker.github.io/keyword-api/swagger-ui/)
+- OpenAPI Raw Files: [JSON](https://wordtracker.github.io/keyword-api/openapi.json) [YAML](https://wordtracker.github.io/keyword-api/openapi.yaml)
 
 **Warning:** All above links are updated only after Travis CI finishes deployment
 

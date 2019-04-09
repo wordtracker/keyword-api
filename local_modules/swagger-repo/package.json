@@ -22,7 +22,7 @@
   "_resolved": "https://registry.npmjs.org/swagger-repo/-/swagger-repo-2.0.0-rc.11.tgz",
   "_shasum": "a4182d0629443c1402e361bb985996c1de993b3c",
   "_spec": "swagger-repo@^2.0.0-rc.6",
-  "_where": "/Users/mikemindel/Projects/wordtracker/wt-api-docs",
+  "_where": "/Users/mikemindel/Projects/wordtracker/keyword-api",
   "bin": {
     "swagger-repo": "./bin/swagger-repo.js"
   },
