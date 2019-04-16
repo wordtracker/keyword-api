@@ -78,47 +78,6 @@
         }
       ]
     },
-    "/fetch": {
-      "get": {
-        "summary": "/fetch (exact search volume for multiple seed terms)",
-        "description": "Whereas /search takes one or more seeds terms and returns up to 2000 keyword suggestions, /fetch is more specific. This method allows you to enter up to 500 seeds and retrieve the search volume (and panelist volumes) for each of those seeds specifically.",
-        "operationId": "fetch",
-        "responses": {
-          "200": {
-            "description": "Monthly search volume for one or more specific seed terms for an engine and a country\n e.g. Google US. Also includes panelists per month, total volume, average volume for\n last 12 months, total months seen and the query parameters.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "firefox": {
-                    "value": "{\n    \"results\": [\n        {\n            \"keyword\": \"hello world\",\n            \"total_volume_for_last_12_months\": 984,\n            \"avg_volume_for_last_12_months\": 82,\n            \"volume_by_month\": [\n                {\n                    \"volume\": 93,\n                    \"year\": \"2018\",\n                    \"month\": \"03\"\n                },\n                {\n                    \"volume\": 89,\n                    \"year\": \"2018\",\n                    \"month\": \"04\"\n                },\n                {\n                    \"volume\": 113,\n                    \"year\": \"2018\",\n                    \"month\": \"05\"\n                },\n                ...\n            ],\n            \"panelist_ids_by_month\": [\n                {\n                    \"ids\": 59,\n                    \"year\": \"2018\",\n                    \"month\": \"03\"\n                },\n                {\n                    \"ids\": 49,\n                    \"year\": \"2018\",\n                    \"month\": \"04\"\n                },\n                {\n                    \"ids\": 58,\n                    \"year\": \"2018\",\n                    \"month\": \"05\"\n                },\n                ...\n            ],\n            \"total_months_seen\": 12\n        }\n    ],\n    \"params\": {\n        \"engine\": \"google\",\n        \"country\": \"us\",\n        \"seeds\": [\n            \"hello world\"\n        ],\n        \"limit\": null,\n        \"type\": \"exact\",\n        \"sort\": \"total\"\n    }\n}"
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/AccessForbidden"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          }
-        }
-      },
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/seeds"
-        },
-        {
-          "$ref": "#/components/parameters/engine"
-        },
-        {
-          "$ref": "#/components/parameters/country"
-        },
-        {
-          "$ref": "#/components/parameters/sort"
-        }
-      ]
-    },
     "/top": {
       "get": {
         "summary": "/top (keywords for an engine/country)",
@@ -262,6 +221,47 @@
           }
         }
       }
+    },
+    "/fetch": {
+      "post": {
+        "summary": "/fetch (exact search volume for multiple seed terms)",
+        "description": "Whereas /search takes one or more seeds terms and returns up to 2000 keyword suggestions, /fetch is more specific. This method allows you to enter up to 500 seeds and retrieve the search volume (and panelist volumes) for each of those seeds specifically.",
+        "operationId": "fetch",
+        "responses": {
+          "200": {
+            "description": "Monthly search volume for one or more specific seed terms for an engine and a country\n e.g. Google US. Also includes panelists per month, total volume, average volume for\n last 12 months, total months seen and the query parameters.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "firefox": {
+                    "value": "{\n    \"results\": [\n        {\n            \"keyword\": \"hello world\",\n            \"total_volume_for_last_12_months\": 984,\n            \"avg_volume_for_last_12_months\": 82,\n            \"volume_by_month\": [\n                {\n                    \"volume\": 93,\n                    \"year\": \"2018\",\n                    \"month\": \"03\"\n                },\n                {\n                    \"volume\": 89,\n                    \"year\": \"2018\",\n                    \"month\": \"04\"\n                },\n                {\n                    \"volume\": 113,\n                    \"year\": \"2018\",\n                    \"month\": \"05\"\n                },\n                ...\n            ],\n            \"panelist_ids_by_month\": [\n                {\n                    \"ids\": 59,\n                    \"year\": \"2018\",\n                    \"month\": \"03\"\n                },\n                {\n                    \"ids\": 49,\n                    \"year\": \"2018\",\n                    \"month\": \"04\"\n                },\n                {\n                    \"ids\": 58,\n                    \"year\": \"2018\",\n                    \"month\": \"05\"\n                },\n                ...\n            ],\n            \"total_months_seen\": 12\n        }\n    ],\n    \"params\": {\n        \"engine\": \"google\",\n        \"country\": \"us\",\n        \"seeds\": [\n            \"hello world\"\n        ],\n        \"limit\": null,\n        \"type\": \"exact\",\n        \"sort\": \"total\"\n    }\n}"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/AccessForbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/seeds"
+        },
+        {
+          "$ref": "#/components/parameters/engine"
+        },
+        {
+          "$ref": "#/components/parameters/country"
+        },
+        {
+          "$ref": "#/components/parameters/sort"
+        }
+      ]
     }
   },
   "components": {
@@ -315,7 +315,7 @@
       "seeds": {
         "name": "seeds",
         "in": "query",
-        "description": "One or more strings (max 100). If entering a single seed then simply specify seeds=dog and if multiple then please use a list format e.g. seeds=[''dog'',''dog training''].\nThink of `seeds` as one or more of your starter ideas to get going with e.g. 'chocolate' or 'dog training'. This is a separate concept from keywords which are returned in the results and which show exactly what people are typing into the search boxes of the engines like Google. With some analysis some of these results will become your key words aka `keywords`.",
+        "description": "One or more strings (max 100). If entering a single seed then simply specify seeds=dog and if multiple then please use a list format e.g. seeds='dog','dog training'.\nThink of `seeds` as one or more of your starter ideas to get going with e.g. 'chocolate' or 'dog training'. This is a separate concept from keywords which are returned in the results and which show exactly what people are typing into the search boxes of the engines like Google. With some analysis some of these results will become your key words aka `keywords`.",
         "required": true,
         "schema": {
           "type": "array",
@@ -379,7 +379,7 @@
       "type": {
         "name": "type",
         "in": "query",
-        "description": "### Broadest\n\nReturns keyword suggestions for any seed words. E.g. a search for \"dog training\" returns suggestions for \"dog\" or \"training\" returns:\n* dog training\n* training dog\n* a dog is great\n* training day\n\n---\n### Broad\n\nReturns keyword suggestions for all words in any order. E.g. a search for \"dog training\" returns:\n* dog training\n* training your dog\n\nbut not:\n\n* every dog has it's day\n\n\n---\n### Phrase\n\nReturns keyword suggestions for the exact phrase. E.g. a search for \"dog training\" returns:\n* dog training\n* I love dog training\n* dog training is fun\n\n\n---\n### Wildcard\n\nAllows you to use the * and ? characters to specify a wildcard. E.g. tr* returns:\n* dog training\n* training your dog",
+        "description": "### Broadest\n\nReturns keyword suggestions for any seed words. E.g. a search for 'dog training' returns suggestions for 'dog' or 'training' returns:\n* dog training\n* training dog\n* a dog is great\n* training day\n\n---\n### Broad\n\nReturns keyword suggestions for all words in any order. E.g. a search for 'dog training' returns:\n* dog training\n* training your dog\n\nbut not:\n\n* every dog has it's day\n\n\n---\n### Phrase\n\nReturns keyword suggestions for the exact phrase. E.g. a search for 'dog training' returns:\n* dog training\n* I love dog training\n* dog training is fun\n\n\n---\n### Wildcard\n\nAllows you to use the * and ? characters to specify a wildcard. E.g. tr* returns:\n* dog training\n* training your dog",
         "required": true,
         "schema": {
           "enum": [

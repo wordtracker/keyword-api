@@ -184,87 +184,6 @@ paths:
       - $ref: '#/components/parameters/type'
       - $ref: '#/components/parameters/sort'
       - $ref: '#/components/parameters/limit'
-  /fetch:
-    get:
-      summary: /fetch (exact search volume for multiple seed terms)
-      description: 'Whereas /search takes one or more seeds terms and returns up to 2000 keyword suggestions, /fetch is more specific. This method allows you to enter up to 500 seeds and retrieve the search volume (and panelist volumes) for each of those seeds specifically.'
-      operationId: fetch
-      responses:
-        '200':
-          description: |-
-            Monthly search volume for one or more specific seed terms for an engine and a country
-             e.g. Google US. Also includes panelists per month, total volume, average volume for
-             last 12 months, total months seen and the query parameters.
-          content:
-            application/json:
-              examples:
-                firefox:
-                  value: |-
-                    {
-                        "results": [
-                            {
-                                "keyword": "hello world",
-                                "total_volume_for_last_12_months": 984,
-                                "avg_volume_for_last_12_months": 82,
-                                "volume_by_month": [
-                                    {
-                                        "volume": 93,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "volume": 89,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "volume": 113,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                                ],
-                                "panelist_ids_by_month": [
-                                    {
-                                        "ids": 59,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "ids": 49,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "ids": 58,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                                ],
-                                "total_months_seen": 12
-                            }
-                        ],
-                        "params": {
-                            "engine": "google",
-                            "country": "us",
-                            "seeds": [
-                                "hello world"
-                            ],
-                            "limit": null,
-                            "type": "exact",
-                            "sort": "total"
-                        }
-                    }
-        '401':
-          $ref: '#/components/responses/AccessForbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-    parameters:
-      - $ref: '#/components/parameters/seeds'
-      - $ref: '#/components/parameters/engine'
-      - $ref: '#/components/parameters/country'
-      - $ref: '#/components/parameters/sort'
   /top:
     get:
       summary: /top (keywords for an engine/country)
@@ -470,6 +389,87 @@ paths:
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+  /fetch:
+    post:
+      summary: /fetch (exact search volume for multiple seed terms)
+      description: 'Whereas /search takes one or more seeds terms and returns up to 2000 keyword suggestions, /fetch is more specific. This method allows you to enter up to 500 seeds and retrieve the search volume (and panelist volumes) for each of those seeds specifically.'
+      operationId: fetch
+      responses:
+        '200':
+          description: |-
+            Monthly search volume for one or more specific seed terms for an engine and a country
+             e.g. Google US. Also includes panelists per month, total volume, average volume for
+             last 12 months, total months seen and the query parameters.
+          content:
+            application/json:
+              examples:
+                firefox:
+                  value: |-
+                    {
+                        "results": [
+                            {
+                                "keyword": "hello world",
+                                "total_volume_for_last_12_months": 984,
+                                "avg_volume_for_last_12_months": 82,
+                                "volume_by_month": [
+                                    {
+                                        "volume": 93,
+                                        "year": "2018",
+                                        "month": "03"
+                                    },
+                                    {
+                                        "volume": 89,
+                                        "year": "2018",
+                                        "month": "04"
+                                    },
+                                    {
+                                        "volume": 113,
+                                        "year": "2018",
+                                        "month": "05"
+                                    },
+                                    ...
+                                ],
+                                "panelist_ids_by_month": [
+                                    {
+                                        "ids": 59,
+                                        "year": "2018",
+                                        "month": "03"
+                                    },
+                                    {
+                                        "ids": 49,
+                                        "year": "2018",
+                                        "month": "04"
+                                    },
+                                    {
+                                        "ids": 58,
+                                        "year": "2018",
+                                        "month": "05"
+                                    },
+                                    ...
+                                ],
+                                "total_months_seen": 12
+                            }
+                        ],
+                        "params": {
+                            "engine": "google",
+                            "country": "us",
+                            "seeds": [
+                                "hello world"
+                            ],
+                            "limit": null,
+                            "type": "exact",
+                            "sort": "total"
+                        }
+                    }
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    parameters:
+      - $ref: '#/components/parameters/seeds'
+      - $ref: '#/components/parameters/engine'
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/sort'
 components:
   schemas:
     Error:
@@ -506,7 +506,7 @@ components:
       name: seeds
       in: query
       description: |-
-        One or more strings (max 100). If entering a single seed then simply specify seeds=dog and if multiple then please use a list format e.g. seeds=[''dog'',''dog training''].
+        One or more strings (max 100). If entering a single seed then simply specify seeds=dog and if multiple then please use a list format e.g. seeds='dog','dog training'.
         Think of `seeds` as one or more of your starter ideas to get going with e.g. 'chocolate' or 'dog training'. This is a separate concept from keywords which are returned in the results and which show exactly what people are typing into the search boxes of the engines like Google. With some analysis some of these results will become your key words aka `keywords`.
       required: true
       schema:
@@ -568,7 +568,7 @@ components:
       description: |-
         ### Broadest
 
-        Returns keyword suggestions for any seed words. E.g. a search for "dog training" returns suggestions for "dog" or "training" returns:
+        Returns keyword suggestions for any seed words. E.g. a search for 'dog training' returns suggestions for 'dog' or 'training' returns:
         * dog training
         * training dog
         * a dog is great
@@ -577,7 +577,7 @@ components:
         ---
         ### Broad
 
-        Returns keyword suggestions for all words in any order. E.g. a search for "dog training" returns:
+        Returns keyword suggestions for all words in any order. E.g. a search for 'dog training' returns:
         * dog training
         * training your dog
 
@@ -589,7 +589,7 @@ components:
         ---
         ### Phrase
 
-        Returns keyword suggestions for the exact phrase. E.g. a search for "dog training" returns:
+        Returns keyword suggestions for the exact phrase. E.g. a search for 'dog training' returns:
         * dog training
         * I love dog training
         * dog training is fun
