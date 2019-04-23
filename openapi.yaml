@@ -245,6 +245,8 @@ paths:
       - $ref: '#/components/parameters/type'
       - $ref: '#/components/parameters/sort'
       - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/scale'
+      - $ref: '#/components/parameters/majestic'
   /top:
     get:
       summary: /top (keywords for an engine/country)
@@ -363,6 +365,8 @@ paths:
       - $ref: '#/components/parameters/country'
       - $ref: '#/components/parameters/sort'
       - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/scale'
+      - $ref: '#/components/parameters/majestic'
   /count:
     get:
       summary: /count (total keywords available for engine/country)
@@ -531,6 +535,8 @@ paths:
       - $ref: '#/components/parameters/engine'
       - $ref: '#/components/parameters/country'
       - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/scale'
+      - $ref: '#/components/parameters/majestic'
 components:
   schemas:
     Error:
@@ -690,6 +696,20 @@ components:
       required: true
       schema:
         type: integer
+    scale:
+      name: scale
+      in: query
+      description: Scale the raw keyword sample volumes to match the engine's estimated search volumes.
+      required: true
+      schema:
+        type: boolean
+    majestic:
+      name: majestic
+      in: query
+      description: Add Majestic (www.majestic.com) link count metrics.
+      required: true
+      schema:
+        type: boolean
   securitySchemes:
     app_key:
       type: apiKey
