@@ -1,8 +1,8 @@
 openapi: 3.0.2
 info:
   title: Wordtracker Keyword API
-  description: |-
-    *First release: 09.04.19*
+  description: |+
+    *First release: 09.04.19, Last release: 23.04.19*
     ## Introduction
 
     ### Raw Google, YouTube, Amazon, eBay keyword search data
@@ -14,7 +14,7 @@ info:
     - Amazon
     - eBay
      
-    For the following 30 countries:
+    We have search volumes for the following 30 countries:
     - Global (all countries merged together)
     - United States (US), United Kingdom (GB), Ukraine (UA)
     - Indonesia (ID), India (IN), Turkey (TR), Thailand (TH)
@@ -26,7 +26,7 @@ info:
     - Greece (GR), Romania (RO), Isarel (IL).
 
 
-    ### Get going in 10 minutes!
+    #### Get going in 10 minutes!
     First [register for an API account](https://wordtracker.3scale.net) (30 day free trial available). You can then find the production ready Wordtracker Keyword API 2.0 server at: https://api.lc.wordtracker.com
 
     Please make sure you add the `app_id` and `app_key` as authorisation.
@@ -34,14 +34,75 @@ info:
 
     Please note: If the above url does not work, please check the version e.g. /v2, /v2.1 etc. You can also see the latest urls at https://api.lc.wordtracker.com.
 
+    ### Monthly keyword search volumes
+    Please note that we use a 12 month rolling window for monthly search volumes. This means that as a new month begins, the last 12 months of data is re-processed up until the close of the previous month. E.g. if today is May 1st then a new 12 month rolling window is created from May 2018 - Apr 2019. That also means you will see search volumes and # panelists for each of those last 12 months as well as a total volume & average volume for all months. 
 
-    ### Historical search volumes: 12 month rolling window
-    Please note that we use a 12 month rolling window. This means that as a new month begins, the last 12 months of data is re-processed up until the close of the previous month. E.g. if today is May 1st then a new 12 month rolling window is created from May 2018 - Apr 2019. That also means you will see search volumes and # panelists for each of those last 12 months as well as a total volume & average volume for all months. 
+    ### Majestic SEO link counts
+    Wordtracker have partnered with [MajesticSEO](http://www.majestic.com) who have the planet's largest Link Index database. Our 'global Google' keyword list has been matched against Majestic's database to allow you to see how much competition there is online for a given keyword. Keywords with high search volumes and a low link footprint present good SEO opportunities. 
+    Note: These metrics cover both 'on page' (title tag) and 'off page' (incomingl links).
+
+    If the 'majestic' parameter is set to True, the following additional [MajesticSEO](http://www.majestic.com) link count metrics are available:
+
+    #### 1) exact_urls_in_title
+    Number of URLs that contain the exact keyword phrase within the title tag. E.g. for the keyword 'dog training' this would match 'dog training' and 'i love dog training' but not 'training my dog'.
+
+
+    #### 2) exact_domains_in_title
+    Number of unique root domains (not URLs) that contain the exact keyword phrase within the title tag.
+
+
+    #### 3) exact_urls_in_url
+    Number of URLs that contain the exact keyword phrase within the URL. E.g. for the keyword 'dog training', this would match http://www.domain.com/dog-training-is-cool.html or http://www.dog-training.com.
+
+
+    #### 4) exact_domains_in_url
+    Number of unique root domains (not URLs) that contain the exact keyword phrase in the url belonging to that root domain.
+
+
+    #### 5) exact_urls_in_anchor
+    Number of URLs that contain the exact keyword phrase within the external anchor text of at least one backlink.
+
+
+    #### 6) exact_domains_in_anchor
+    Number of root domains (not URLs) that contain the exact keyword phrase within the external anchor text of at least one backlink.
+
+
+    #### 7) exact_urls_in_anchor_and_in_title
+    Number of URLs that contain the exact keyword phrase within both within the title tag & also in the external anchor text of at least one backlink.
+
+
+    #### 8) exact_domains_in_anchor_and_in_title
+    Number of root domains (not URLs) that contain the exact keyword phrase within both the external anchor text of at least one backlink and within the title tag.
+
+
+    #### 9) broad_urls_in_title
+    Number of URLs that contain all the words in any order within the title tag. E.g. for the keyword 'dog training' this would match 'training my dog'.
+
+
+    #### 10) broad_domains_in_title
+    Number of unique root domains (not URLs) that contain all the words in any order within the title tag.
+
+    #### 11) broad_urls_in_anchor
+    Number of URLs that contain all the words in any order in the external anchor text of at least one backlink.
+
+
+    #### 12) broad_domains_in_anchor
+    Number of root domains (not URLs) that contain all the words in any order within the external anchor text of at least one backlink.
+
+
+    #### 13) broad_urls_in_anchor_and_in_title
+    Number of URLs that contain all the words in any order, both within the title tag & also in the external anchor text of at least one backlink.
+
+
+    #### 14) broad_domains_in_anchor_and_in_title
+    Number of root domains (not URLs) that contain all the words in any order within the external anchor text of at least one backlink and the title tag.
 
     ### Please choose from these options
     * [Register for an API account (30 day free trial available)](https://wordtracker.3scale.net)
     * [API pricing](http://www.wordtracker.com/api)
     * [Try the data out in the Wordtracker keyword tool](http://www.wordtracker.com)
+
+
   termsOfService: 'https://www.wordtracker.com/terms'
   contact:
     name: Wordtracker API Team
@@ -50,7 +111,7 @@ info:
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
-  version: 2.0.0
+  version: 2.0.1
   x-date: 2019-03-07T00:00:00.000Z
   x-logo:
     url: 'https://s3.amazonaws.com/wordtracker-front-end-assets/images/wordtracker-logo-transparent.png'
