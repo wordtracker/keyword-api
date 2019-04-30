@@ -2,7 +2,7 @@ openapi: 3.0.2
 info:
   title: Wordtracker Keyword API
   description: |+
-    *First release: 09.04.19, Last release: 23.04.19*
+    *First release: 09.04.19, Last release: 30.04.19*
     ## Introduction
 
     ### Raw Google, YouTube, Amazon, eBay keyword search data
@@ -26,14 +26,21 @@ info:
     - Greece (GR), Romania (RO), Isarel (IL).
 
 
-    #### Get going in 10 minutes!
+    ## Get going in 10 minutes!
     First [register for an API account](https://wordtracker.3scale.net) (30 day free trial available). You can then find the production ready Wordtracker Keyword API 2.0 server at: https://api.lc.wordtracker.com
 
     Please make sure you add the `app_id` and `app_key` as authorisation.
     Here's an example [REST url](https://api.lc.wordtracker.com/v2/search?engine=google&country=us&seeds=dog&limit=10&type=broad&app_id=your_app_id&app_key=your_key) to query the /search method. 
 
     Please note: If the above url does not work, please check the version e.g. /v2, /v2.1 etc. You can also see the latest urls at https://api.lc.wordtracker.com.
+    ### Please choose from these options
+    * [Register for an API account (30 day free trial available)](https://wordtracker.3scale.net)
+    * [API pricing](http://www.wordtracker.com/api)
+    * [Try the data out in the Wordtracker keyword tool](http://www.wordtracker.com)
 
+
+
+    ## Available metrics
     ### Monthly keyword search volumes
     Please note that we use a 12 month rolling window for monthly search volumes. This means that as a new month begins, the last 12 months of data is re-processed up until the close of the previous month. E.g. if today is May 1st then a new 12 month rolling window is created from May 2018 - Apr 2019. That also means you will see search volumes and # panelists for each of those last 12 months as well as a total volume & average volume for all months. 
 
@@ -43,65 +50,25 @@ info:
 
     If the 'majestic' parameter is set to True, the following additional [MajesticSEO](http://www.majestic.com) link count metrics are available:
 
-    #### 1) exact_urls_in_title
-    Number of URLs that contain the exact keyword phrase within the title tag. E.g. for the keyword 'dog training' this would match 'dog training' and 'i love dog training' but not 'training my dog'.
+    1. **exact_urls_in_title:** Number of URLs that contain the exact keyword phrase within the title tag. E.g. for the keyword 'dog training' this would match 'dog training' and 'i love dog training' but not 'training my dog'.    
+    2. **exact_domains_in_title:** Number of unique root domains (not URLs) that contain the exact keyword phrase within the title tag.
+    3. **exact_urls_in_url**: Number of URLs that contain the exact keyword phrase within the URL. E.g. for the keyword 'dog training', this would match http://www.domain.com/dog-training-is-cool.html or http://www.dog-training.com.
+    4. **exact_domains_in_url**: Number of unique root domains (not URLs) that contain the exact keyword phrase in the url belonging to that root domain.
+    5. **exact_urls_in_anchor**: Number of URLs that contain the exact keyword phrase within the external anchor text of at least one backlink.
+    6. **exact_domains_in_anchor**: Number of root domains (not URLs) that contain the exact keyword phrase within the external anchor text of at least one backlink.
+    7. **exact_urls_in_anchor_and_in_title**: Number of URLs that contain the exact keyword phrase within both within the title tag & also in the external anchor text of at least one backlink.
+    8. **exact_domains_in_anchor_and_in_title**: Number of root domains (not URLs) that contain the exact keyword phrase within both the external anchor text of at least one backlink and within the title tag.
+    9. **broad_urls_in_title**: Number of URLs that contain all the words in any order within the title tag. E.g. for the keyword 'dog training' this would match 'training my dog'.
+    10. **broad_domains_in_title**: Number of unique root domains (not URLs) that contain all the words in any order within the title tag.
+    11. **broad_urls_in_anchor**: Number of URLs that contain all the words in any order in the external anchor text of at least one backlink.
+    12. **broad_domains_in_anchor**: Number of root domains (not URLs) that contain all the words in any order within the external anchor text of at least one backlink.
+    13. **broad_urls_in_anchor_and_in_title**: Number of URLs that contain all the words in any order, both within the title tag & also in the external anchor text of at least one backlink.
+    14. **broad_domains_in_anchor_and_in_title**: Number of root domains (not URLs) that contain all the words in any order within the external anchor text of at least one backlink and the title tag.
 
-
-    #### 2) exact_domains_in_title
-    Number of unique root domains (not URLs) that contain the exact keyword phrase within the title tag.
-
-
-    #### 3) exact_urls_in_url
-    Number of URLs that contain the exact keyword phrase within the URL. E.g. for the keyword 'dog training', this would match http://www.domain.com/dog-training-is-cool.html or http://www.dog-training.com.
-
-
-    #### 4) exact_domains_in_url
-    Number of unique root domains (not URLs) that contain the exact keyword phrase in the url belonging to that root domain.
-
-
-    #### 5) exact_urls_in_anchor
-    Number of URLs that contain the exact keyword phrase within the external anchor text of at least one backlink.
-
-
-    #### 6) exact_domains_in_anchor
-    Number of root domains (not URLs) that contain the exact keyword phrase within the external anchor text of at least one backlink.
-
-
-    #### 7) exact_urls_in_anchor_and_in_title
-    Number of URLs that contain the exact keyword phrase within both within the title tag & also in the external anchor text of at least one backlink.
-
-
-    #### 8) exact_domains_in_anchor_and_in_title
-    Number of root domains (not URLs) that contain the exact keyword phrase within both the external anchor text of at least one backlink and within the title tag.
-
-
-    #### 9) broad_urls_in_title
-    Number of URLs that contain all the words in any order within the title tag. E.g. for the keyword 'dog training' this would match 'training my dog'.
-
-
-    #### 10) broad_domains_in_title
-    Number of unique root domains (not URLs) that contain all the words in any order within the title tag.
-
-    #### 11) broad_urls_in_anchor
-    Number of URLs that contain all the words in any order in the external anchor text of at least one backlink.
-
-
-    #### 12) broad_domains_in_anchor
-    Number of root domains (not URLs) that contain all the words in any order within the external anchor text of at least one backlink.
-
-
-    #### 13) broad_urls_in_anchor_and_in_title
-    Number of URLs that contain all the words in any order, both within the title tag & also in the external anchor text of at least one backlink.
-
-
-    #### 14) broad_domains_in_anchor_and_in_title
-    Number of root domains (not URLs) that contain all the words in any order within the external anchor text of at least one backlink and the title tag.
-
-    ### Please choose from these options
-    * [Register for an API account (30 day free trial available)](https://wordtracker.3scale.net)
-    * [API pricing](http://www.wordtracker.com/api)
-    * [Try the data out in the Wordtracker keyword tool](http://www.wordtracker.com)
-
+    ## Releases  
+    - **2.0.0**: 09.04.19: First release 
+    - **2.0.1**: 23.04.19: Add Majestic link metrics 
+    - **2.0.2**: 30.04.19: Add /stats/keyword and /stats/link calls
 
   termsOfService: 'https://www.wordtracker.com/terms'
   contact:
@@ -111,7 +78,7 @@ info:
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
-  version: 2.0.1
+  version: 2.0.2
   x-date: 2019-03-07T00:00:00.000Z
   x-logo:
     url: 'https://s3.amazonaws.com/wordtracker-front-end-assets/images/wordtracker-logo-transparent.png'
@@ -131,109 +98,70 @@ paths:
           description: 'Monthly search volume for one or more specific seed terms for an engine and a country e.g. Google US. Also includes panelists per month, total volume, average volume for last 12 months, total months seen and the query parameters.'
           content:
             application/json:
-              schema:
-                type: array
-                items: {}
               examples:
                 firefox:
-                  value: |-
-                    {
-                        "results": [
-                            {
-                                "keyword": "firefox",
-                                "total_volume_for_last_12_months": 25258,
-                                "avg_volume_for_last_12_months": 2105,
-                                "volume_by_month": [
-                                    {
-                                        "volume": 2336,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "volume": 2486,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "volume": 2410,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                                 ],
-                                "panelist_ids_by_month": [
-                                    {
-                                        "ids": 1440,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "ids": 1384,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "ids": 1263,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                               ],
-                                "total_months_seen": 12
-                            },
-                            {
-                                "keyword": "mozilla firefox",
-                                "total_volume_for_last_12_months": 4013,
-                                "avg_volume_for_last_12_months": 334,
-                                "volume_by_month": [
-                                    {
-                                        "volume": 476,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "volume": 424,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "volume": 373,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                                ],
-                                "panelist_ids_by_month": [
-                                    {
-                                        "ids": 296,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "ids": 233,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "ids": 198,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                                "total_months_seen": 12
-                            },
-                        ],
-                        "params": {
-                            "engine": "google",
-                            "country": "us",
-                            "seeds": [
-                                "firefox"
-                            ],
-                            "limit": 10,
-                            "type": "broad",
-                            "sort": "total"
-                        }
-                    }
+                  value:
+                    results:
+                      - keyword: firefox
+                        total_volume_for_last_12_months: 25258
+                        avg_volume_for_last_12_months: 2105
+                        volume_by_month:
+                          - volume: 2336
+                            year: '2018'
+                            month: '03'
+                          - volume: 2486
+                            year: '2018'
+                            month: '04'
+                          - volume: 2410
+                            year: '2018'
+                            month: '05'
+                          - ...
+                        panelist_ids_by_month:
+                          - ids: 1440
+                            year: '2018'
+                            month: '03'
+                          - ids: 1384
+                            year: '2018'
+                            month: '04'
+                          - ids: 1263
+                            year: '2018'
+                            month: '05'
+                          - ...
+                        total_months_seen: 12
+                      - keyword: mozilla firefox
+                        total_volume_for_last_12_months: 4013
+                        avg_volume_for_last_12_months: 334
+                        volume_by_month:
+                          - volume: 476
+                            year: '2018'
+                            month: '03'
+                          - volume: 424
+                            year: '2018'
+                            month: '04'
+                          - volume: 373
+                            year: '2018'
+                            month: '05'
+                          - ...
+                        panelist_ids_by_month:
+                          - ids: 296
+                            year: '2018'
+                            month: '03'
+                          - ids: 233
+                            year: '2018'
+                            month: '04'
+                          - ids: 198
+                            year: '2018'
+                            month: '05'
+                          - ...
+                        total_months_seen: 12
+                    params:
+                      engine: google
+                      country: us
+                      seeds:
+                        - firefox
+                      limit: 10
+                      type: broad
+                      sort: total
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
@@ -259,103 +187,65 @@ paths:
             application/json:
               examples:
                 firefox:
-                  value: |-
-                    {
-                        "results": [
-                            {
-                                "keyword": "youtube",
-                                "total_volume_for_last_12_months": 1381715,
-                                "avg_volume_for_last_12_months": 115143,
-                                "volume_by_month": [
-                                    {
-                                        "volume": 133346,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "volume": 124478,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "volume": 121125,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                                ],
-                                "panelist_ids_by_month": [
-                                    {
-                                        "ids": 49189,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "ids": 42654,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "ids": 38276,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                                ],
-                                "total_months_seen": 12
-                            },
-                            {
-                                "keyword": "gmail",
-                                "total_volume_for_last_12_months": 933757,
-                                "avg_volume_for_last_12_months": 77813,
-                                "volume_by_month": [
-                                    {
-                                        "volume": 89668,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "volume": 85709,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "volume": 84670,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                                ],
-                                "panelist_ids_by_month": [
-                                    {
-                                        "ids": 29843,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "ids": 25751,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "ids": 23864,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                                ],
-                                "total_months_seen": 12
-                            },
-                        ],
-                        "params": {
-                            "engine": "google",
-                            "country": "us",
-                            "seeds": null,
-                            "limit": 10,
-                            "type": null,
-                            "sort": "total"
-                        }
-                    }
+                  value:
+                    results:
+                      - keyword: youtube
+                        total_volume_for_last_12_months: 1381715
+                        avg_volume_for_last_12_months: 115143
+                        volume_by_month:
+                          - volume: 133346
+                            year: '2018'
+                            month: '03'
+                          - volume: 124478
+                            year: '2018'
+                            month: '04'
+                          - volume: 121125
+                            year: '2018'
+                            month: '05'
+                          - ...
+                        panelist_ids_by_month:
+                          - ids: 49189
+                            year: '2018'
+                            month: '03'
+                          - ids: 42654
+                            year: '2018'
+                            month: '04'
+                          - ids: 38276
+                            year: '2018'
+                            month: '05'
+                          - ...
+                        total_months_seen: 12
+                      - keyword: gmail
+                        total_volume_for_last_12_months: 933757
+                        avg_volume_for_last_12_months: 77813
+                        volume_by_month:
+                          - volume: 89668
+                            year: '2018'
+                            month: '03'
+                          - volume: 85709
+                            year: '2018'
+                            month: '04'
+                          - volume: 84670
+                            year: '2018'
+                            month: '05'
+                          - ...
+                        panelist_ids_by_month:
+                          - ids: 29843
+                            year: '2018'
+                            month: '03'
+                          - ids: 25751
+                            year: '2018'
+                            month: '04'
+                          - ids: 23864
+                            year: '2018'
+                            month: '05'
+                          - ...
+                        total_months_seen: 12
+                    params:
+                      engine: google
+                      country: us
+                      limit: 10
+                      sort: total
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
@@ -379,16 +269,12 @@ paths:
             application/json:
               examples:
                 firefox:
-                  value: |-
-                    {
-                        "count": 1237,
-                        "engine": "google",
-                        "country": "us",
-                        "seeds": [
-                            "hello world"
-                        ],
-                        "type": "broad"
-                    }
+                  value:
+                    count: 1237
+                    engine: google
+                    country: us
+                    seeds: hello world
+                    type: broad
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
@@ -398,31 +284,6 @@ paths:
       - $ref: '#/components/parameters/engine'
       - $ref: '#/components/parameters/country'
       - $ref: '#/components/parameters/type'
-  /stats:
-    get:
-      summary: /stats (for each engine/country)
-      description: Returns statistics about the whole dataset e.g. total number of keywords.
-      operationId: stats
-      responses:
-        '200':
-          description: All the statistics about the whole dataset e.g. total number of keywords. Please note that these statistics will vary based on the engine & country specified in the parameters.
-          content:
-            application/json:
-              examples:
-                result:
-                  value: |-
-                    {
-                        "count": 113253428,
-                        "engine": "google",
-                        "country": "us"
-                    }
-        '401':
-          $ref: '#/components/responses/AccessForbidden'
-        '404':
-          $ref: '#/components/responses/NotFound'
-    parameters:
-      - $ref: '#/components/parameters/engine'
-      - $ref: '#/components/parameters/country'
   /periods:
     get:
       summary: /periods (last 12 months as a list)
@@ -435,21 +296,69 @@ paths:
             application/json:
               examples:
                 result:
-                  value: |-
-                    [
-                        "2018_03",
-                        "2018_04",
-                        "2018_05",
-                        "2018_06",
-                        "2018_07",
-                        "2018_08",
-                        "2018_09",
-                        "2018_10",
-                        "2018_11",
-                        "2018_12",
-                        "2019_01",
-                        "2019_02"
-                    ]
+                  value:
+                    - 201803
+                    - 201804
+                    - 201805
+                    - 201806
+                    - 201807
+                    - 201808
+                    - 201809
+                    - 201810
+                    - 201811
+                    - 201812
+                    - 201901
+                    - 201902
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /stats/keyword:
+    get:
+      summary: /stats/keyword (for each engine/country)
+      description: Returns statistics about the whole dataset e.g. total number of keywords.
+      operationId: stats/keyword
+      responses:
+        '200':
+          description: All the statistics about the whole dataset e.g. total number of keywords. Please note that these statistics will vary based on the engine & country specified in the parameters.
+          content:
+            application/json:
+              examples:
+                result:
+                  value:
+                    max: 1403542
+                    count: 82347238
+                    sum: 230272251
+                    avg: 2
+                    engine: google
+                    country: global
+                    volume: avg
+        '401':
+          $ref: '#/components/responses/AccessForbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    parameters:
+      - $ref: '#/components/parameters/engine'
+      - $ref: '#/components/parameters/country'
+      - $ref: '#/components/parameters/volume'
+      - $ref: '#/components/parameters/scale'
+  /stats/link:
+    get:
+      summary: /stats/link
+      description: Returns statistics about the whole Majestic dataset.
+      operationId: stats/link
+      responses:
+        '200':
+          description: Statistics about the Majestic link dataset e.g. IAAT (in anchor and title).
+          content:
+            application/json:
+              examples:
+                result:
+                  value:
+                    iaat_max: 58915327
+                    iaat_count: 82347238
+                    iaat_sum: 26596478952
+                    iaat_avg: 322
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
@@ -469,63 +378,40 @@ paths:
             application/json:
               examples:
                 firefox:
-                  value: |-
-                    {
-                        "results": [
-                            {
-                                "keyword": "hello world",
-                                "total_volume_for_last_12_months": 984,
-                                "avg_volume_for_last_12_months": 82,
-                                "volume_by_month": [
-                                    {
-                                        "volume": 93,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "volume": 89,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "volume": 113,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                                ],
-                                "panelist_ids_by_month": [
-                                    {
-                                        "ids": 59,
-                                        "year": "2018",
-                                        "month": "03"
-                                    },
-                                    {
-                                        "ids": 49,
-                                        "year": "2018",
-                                        "month": "04"
-                                    },
-                                    {
-                                        "ids": 58,
-                                        "year": "2018",
-                                        "month": "05"
-                                    },
-                                    ...
-                                ],
-                                "total_months_seen": 12
-                            }
-                        ],
-                        "params": {
-                            "engine": "google",
-                            "country": "us",
-                            "seeds": [
-                                "hello world"
-                            ],
-                            "limit": null,
-                            "type": "exact",
-                            "sort": "total"
-                        }
-                    }
+                  value:
+                    results:
+                      - keyword: hello world
+                        total_volume_for_last_12_months: 984
+                        avg_volume_for_last_12_months: 82
+                        volume_by_month:
+                          - volume: 93
+                            year: '2018'
+                            month: '03'
+                          - volume: 89
+                            year: '2018'
+                            month: '04'
+                          - volume: 113
+                            year: '2018'
+                            month: '05'
+                          - ...
+                        panelist_ids_by_month:
+                          - ids: 59
+                            year: '2018'
+                            month: '03'
+                          - ids: 49
+                            year: '2018'
+                            month: '04'
+                          - ids: 58
+                            year: '2018'
+                            month: '05'
+                          - ...
+                        total_months_seen: 12
+                    params:
+                      engine: google
+                      country: us
+                      seeds: hello world
+                      type: exact
+                      sort: total
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
@@ -710,6 +596,15 @@ components:
       required: true
       schema:
         type: boolean
+    volume:
+      name: volume
+      in: query
+      description: Which volume to use for the last 12 months. I.e. the total for the last 12 months or the average.
+      required: true
+      schema:
+        enum:
+          - total
+          - avg
   securitySchemes:
     app_key:
       type: apiKey
