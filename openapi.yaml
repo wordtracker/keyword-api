@@ -2,11 +2,11 @@ openapi: 3.0.2
 info:
   title: Wordtracker Keyword API
   description: |+
-    *First release: 09.04.19, Last release: 30.04.19*
+    *First release: 09.04.19, Last release: 06.05.19*
     ## Introduction
 
     ### Raw Google, YouTube, Amazon, eBay keyword search data
-    The `Wordtracker Keyword API 2.0` provides keywords and associated search volumes for a range of sources, including Google, YouTube, Amazon and eBay. This data comes from a ~18 million global anonymized panel supplied by [DDMR](https://ddmr.com) which makes it a very reliable, clean source of keywords (2.06 billion unique keywords from 5.5 billion searches). To use the API you will first need to [sign up here](https://wordtracker.3scale.net). For pricing and more general information, please take a [look here](https://www.wordtracker.com/api). 
+    The `Wordtracker Keyword API 2.0` provides keywords and associated search volumes for a range of sources, including Google, YouTube, Amazon and eBay from 106 countries. This data comes from a ~18 million global anonymized panel supplied by [DDMR](https://ddmr.com) which makes it a very reliable, clean source of keywords (2.06 billion unique keywords from 5.5 billion searches). To use the API you will first need to [sign up here](https://wordtracker.3scale.net). For pricing and more general information, please take a [look here](https://www.wordtracker.com/api). 
 
     Please note that this is v2 of the Wordtracker Keyword API and currently includes keywords and search volumes from:
     - Google
@@ -14,17 +14,14 @@ info:
     - Amazon
     - eBay
      
-    We have search volumes for the following 30 countries:
-    - Global (all countries merged together)
-    - United States (US), United Kingdom (GB), Ukraine (UA)
-    - Indonesia (ID), India (IN), Turkey (TR), Thailand (TH)
-    - Pakistan (PK), Canada (CA), Germany (DE), Bangladesh (BD)
-    - Brazil (BR), Mexico (MX), Australia (AU), Spain (ES)
-    - France (FR), Netherlands (NL), Italy (IT), New Zealand (NZ), 
-    - South Africa (ZA), Ireland (IE), Sweden (SE), Poland (PL), 
-    - Japan (JP), Argentina (AR), Republic of Korea (KR), 
-    - Greece (GR), Romania (RO), Isarel (IL).
+    We have search volumes for over 106 countries including (but not limited to):
+    - Global (GL) (all countries merged together)
+    - United States (US), Canada (CA), United Kingdom (GB), 
+    - Australia (AU), New Zealand (NZ), Brazil (BR), Germany (DE), 
+    - Spain (ES), France (FR), India (IN), Italy (IT), Mexico (MX),
+    - Netherlands (NL), Turkey (TR), South Africa (ZA)
 
+    For the full list please see this spreadsheet [Wordtracker keyword API 2.0 | Countries](https://docs.google.com/spreadsheets/d/1GCMXn_l4K5QYg8ijj9Asb9iPtvaep1TmAL2MKwhQIIw/edit#gid=0)
 
     ## Get going in 10 minutes!
     First [register for an API account](https://wordtracker.3scale.net) (30 day free trial available). You can then find the production ready Wordtracker Keyword API 2.0 server at: https://api.lc.wordtracker.com
@@ -66,9 +63,10 @@ info:
     14. **broad_domains_in_anchor_and_in_title**: Number of root domains (not URLs) that contain all the words in any order within the external anchor text of at least one backlink and the title tag.
 
     ## Releases  
-    - **2.0.0**: 09.04.19: First release 
-    - **2.0.1**: 23.04.19: Add Majestic link metrics 
-    - **2.0.2**: 30.04.19: Add /stats/keyword and /stats/link calls
+    - **2.0.0**: 09.04.19: First release.
+    - **2.0.1**: 23.04.19: Add Majestic link metrics.
+    - **2.0.2**: 30.04.19: Add /stats/keyword and /stats/link calls.
+    - **2.0.3**: 06.05.19: Add 106 countries, change country param to country_code, use ISO-3166-2 standard.
 
   termsOfService: 'https://www.wordtracker.com/terms'
   contact:
@@ -78,7 +76,7 @@ info:
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
-  version: 2.0.2
+  version: 2.0.3
   x-date: 2019-03-07T00:00:00.000Z
   x-logo:
     url: 'https://s3.amazonaws.com/wordtracker-front-end-assets/images/wordtracker-logo-transparent.png'
@@ -316,7 +314,7 @@ paths:
   /stats/keyword:
     get:
       summary: /stats/keyword (for each engine/country)
-      description: Returns statistics about the whole dataset e.g. total number of keywords.
+      description: 'Returns statistics about the whole dataset for a specific engine and country e.g. max, count, sum, avg.'
       operationId: stats/keyword
       responses:
         '200':
@@ -349,7 +347,7 @@ paths:
       operationId: stats/link
       responses:
         '200':
-          description: Statistics about the Majestic link dataset e.g. IAAT (in anchor and title).
+          description: Returns statistics about the Majestic link dataset e.g. IAAT (in anchor and title).
           content:
             application/json:
               examples:
@@ -480,41 +478,117 @@ components:
       name: country
       in: query
       description: |-
-        Specifies the territory to search within. Two letter ISO country code or `global`. 
-        Global refers to ALL countries combined together. `us` is United States and `gb` is Great Britain (United Kingdom). Default: `us`.
+        Specifies the territory to search within. Two letter ISO 3166-2 country code or `GL` for global. 
+        Global means all ALL countries combined together. `US` is United States and `GB` is Great Britain (United Kingdom). Default: `US`.
       required: true
       schema:
         enum:
-          - global
-          - us
-          - gb
-          - ua
-          - id
-          - in
-          - tr
-          - th
-          - pk
-          - ca
-          - de
-          - bd
-          - br
-          - mx
-          - au
-          - es
-          - fr
-          - nl
-          - it
-          - nz
-          - za
-          - ie
-          - se
-          - pl
-          - jp
-          - ar
-          - kr
-          - gr
-          - ro
-          - il
+          - GL
+          - US
+          - CA
+          - GB
+          - AU
+          - NZ
+          - AE
+          - AM
+          - AR
+          - AT
+          - AZ
+          - BD
+          - BE
+          - BG
+          - BO
+          - BR
+          - BY
+          - CA
+          - CH
+          - CI
+          - CL
+          - CM
+          - CN
+          - CO
+          - CU
+          - CZ
+          - DE
+          - DK
+          - DO
+          - DZ
+          - EC
+          - EE
+          - EG
+          - ES
+          - ET
+          - FI
+          - FR
+          - GE
+          - GH
+          - GR
+          - GT
+          - HK
+          - HN
+          - HR
+          - HU
+          - ID
+          - IE
+          - IL
+          - IN
+          - IQ
+          - IR
+          - IT
+          - JO
+          - JP
+          - KE
+          - KG
+          - KH
+          - KR
+          - KW
+          - KZ
+          - LB
+          - LK
+          - LT
+          - LV
+          - LY
+          - MA
+          - MD
+          - MG
+          - MM
+          - MN
+          - MX
+          - MY
+          - NG
+          - NL
+          - 'NO'
+          - NP
+          - OM
+          - PE
+          - PH
+          - PK
+          - PL
+          - PS
+          - PT
+          - RO
+          - RS
+          - RU
+          - SA
+          - SE
+          - SG
+          - SK
+          - SN
+          - SV
+          - SY
+          - TH
+          - TN
+          - TR
+          - TW
+          - TZ
+          - UA
+          - UG
+          - UY
+          - UZ
+          - VE
+          - VN
+          - ZA
+          - ZW
     type:
       name: type
       in: query
