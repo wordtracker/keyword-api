@@ -479,7 +479,7 @@ components:
       in: query
       description: |-
         Specifies the territory to search within. Two letter ISO 3166-2 country code or `GL` for global. 
-        Global means all ALL countries combined together. `US` is United States and `GB` is Great Britain (United Kingdom). Default: `US`.
+        Global means all ALL countries combined together. `US` is United States and `GB` is Great Britain (United Kingdom). Default: `GL`.
       required: true
       schema:
         enum:
@@ -639,7 +639,7 @@ components:
       name: sort
       in: query
       description: |-
-        How you'd like to sort the results. Default 'Total'.
+        How you'd like to sort the results. Default `total`.
         Total: Total searches for the last 12 months which means total search volume for Jan + Feb + Mar etc.
         Avg: Average searches for the last 12 months which means the total search volume for all 12 months / 12.
       required: true

@@ -660,7 +660,7 @@
       "country": {
         "name": "country",
         "in": "query",
-        "description": "Specifies the territory to search within. Two letter ISO 3166-2 country code or `GL` for global. \nGlobal means all ALL countries combined together. `US` is United States and `GB` is Great Britain (United Kingdom). Default: `US`.",
+        "description": "Specifies the territory to search within. Two letter ISO 3166-2 country code or `GL` for global. \nGlobal means all ALL countries combined together. `US` is United States and `GB` is Great Britain (United Kingdom). Default: `GL`.",
         "required": true,
         "schema": {
           "enum": [
@@ -790,7 +790,7 @@
       "sort": {
         "name": "sort",
         "in": "query",
-        "description": "How you'd like to sort the results. Default 'Total'.\nTotal: Total searches for the last 12 months which means total search volume for Jan + Feb + Mar etc.\nAvg: Average searches for the last 12 months which means the total search volume for all 12 months / 12.",
+        "description": "How you'd like to sort the results. Default `total`.\nTotal: Total searches for the last 12 months which means total search volume for Jan + Feb + Mar etc.\nAvg: Average searches for the last 12 months which means the total search volume for all 12 months / 12.",
         "required": true,
         "schema": {
           "enum": [
