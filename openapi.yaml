@@ -66,7 +66,7 @@ info:
     - **2.0.0**: 09.04.19: First release.
     - **2.0.1**: 23.04.19: Add Majestic link metrics.
     - **2.0.2**: 30.04.19: Add /stats/keyword and /stats/link calls.
-    - **2.0.3**: 06.05.19: Add 106 countries, change country param to country_code, use ISO-3166-2 standard.
+    - **2.0.3**: 06.05.19: Add 106 countries, change country parameter to country_code, use ISO-3166-2 standard.
 
   termsOfService: 'https://www.wordtracker.com/terms'
   contact:
@@ -342,7 +342,7 @@ paths:
       - $ref: '#/components/parameters/scale'
   /stats/link:
     get:
-      summary: /stats/link
+      summary: /stats/link (Majestic link counts)
       description: Returns statistics about the whole Majestic dataset.
       operationId: stats/link
       responses:
