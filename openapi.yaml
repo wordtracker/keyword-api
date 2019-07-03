@@ -1,8 +1,9 @@
 openapi: 3.0.2
 info:
   title: Wordtracker Keyword API
+  version: 2.0.4
   description: |+
-    *First release: 09.04.19, last API release: 06.05.19, last API docs release: 02.06.19*
+    *First release: 09.04.19, last API release: 03.07.19, last API docs release: 03.07.19*
     ## Introduction
 
     ### Raw Google, YouTube, Amazon, eBay keyword search data
@@ -67,6 +68,7 @@ info:
     - **2.0.1**: 23.04.19: Add Majestic link metrics.
     - **2.0.2**: 30.04.19: Add /stats/keyword and /stats/link calls.
     - **2.0.3**: 06.05.19: Add 106 countries, change country parameter to country_code, use ISO-3166-2 standard.
+    - **2.0.4**: 03.07.19: Add `start` paramater to /search and /top calls to allow pagination.
 
   termsOfService: 'https://www.wordtracker.com/terms'
   contact:
@@ -76,7 +78,6 @@ info:
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
-  version: 2.0.3
   x-date: 2019-03-07T00:00:00.000Z
   x-logo:
     url: 'https://s3.amazonaws.com/wordtracker-front-end-assets/images/wordtracker-logo-transparent.png'
@@ -87,13 +88,8 @@ servers:
 paths:
   /search:
     get:
-      summary: /search (raw keyword suggestions for engine/country_code)
-      description: |
-        Search the Wordtracker Keyword API for raw keyword suggestions and monthly volumes using one or more seed terms.
-      operationId: search
       responses:
         '200':
-          description: 'Monthly search volume for one or more specific seed terms for an engine and a country_code e.g. Google US. Also includes panelists per month, total volume, average volume for last 12 months, total months seen and the query parameters.'
           content:
             application/json:
               examples:
@@ -160,27 +156,29 @@ paths:
                       limit: 10
                       type: broad
                       sort: total
+          description: 'Monthly search volume for one or more specific seed terms for an engine and a country_code e.g. Google US. Also includes panelists per month, total volume, average volume for last 12 months, total months seen and the query parameters.'
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      operationId: search
+      summary: /search (raw keyword suggestions for engine/country_code)
+      description: |
+        Search the Wordtracker Keyword API for raw keyword suggestions and monthly volumes using one or more seed terms.
     parameters:
       - $ref: '#/components/parameters/seeds'
       - $ref: '#/components/parameters/engine'
       - $ref: '#/components/parameters/country_code'
       - $ref: '#/components/parameters/type'
       - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/scale'
       - $ref: '#/components/parameters/majestic'
   /top:
     get:
-      summary: /top (keywords for an engine/country_code)
-      description: Fetches the top keywords (max 2000) for an engine and a country_code e.g. Google US.
-      operationId: top
       responses:
         '200':
-          description: 'Top keywords for an engine and a country_code e.g. Google US for each month. Also includes panelists per month, total volume, average volume for last 12 months, total months seen and the query parameters.'
           content:
             application/json:
               examples:
@@ -244,25 +242,26 @@ paths:
                       country_code: us
                       limit: 10
                       sort: total
+          description: 'Top keywords for an engine and a country_code e.g. Google US for each month. Also includes panelists per month, total volume, average volume for last 12 months, total months seen and the query parameters.'
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      operationId: top
+      summary: /top (keywords for an engine/country_code)
+      description: Fetches the top keywords (max 2000) for an engine and a country_code e.g. Google US.
     parameters:
       - $ref: '#/components/parameters/engine'
       - $ref: '#/components/parameters/country_code'
       - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/limit'
       - $ref: '#/components/parameters/scale'
       - $ref: '#/components/parameters/majestic'
   /count:
     get:
-      summary: /count (total keywords available for engine/country_code)
-      description: Counts the total number of keywords matching specific parameters. The /search API is limited to a maximum of 2000 search results per query. The /count method tells you how many keywords there are in total.
-      operationId: count
       responses:
         '200':
-          description: Total number of keywords matching the parameters e.g. specific engine and country_code.
           content:
             application/json:
               examples:
@@ -273,10 +272,14 @@ paths:
                     country_code: us
                     seeds: hello world
                     type: broad
+          description: Total number of keywords matching the parameters e.g. specific engine and country_code.
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      operationId: count
+      summary: /count (total keywords available for engine/country_code)
+      description: Counts the total number of keywords matching specific parameters. The /search API is limited to a maximum of 2000 search results per query. The /count method tells you how many keywords there are in total.
     parameters:
       - $ref: '#/components/parameters/seeds'
       - $ref: '#/components/parameters/engine'
@@ -284,12 +287,8 @@ paths:
       - $ref: '#/components/parameters/type'
   /periods:
     get:
-      summary: /periods (last 12 months as a list)
-      description: 'Get all the available time periods for the keyword data, usually the last 12 months.'
-      operationId: periods
       responses:
         '200':
-          description: 'All the available time periods for the keyword data, usually the last 12 months.'
           content:
             application/json:
               examples:
@@ -307,18 +306,18 @@ paths:
                     - 201812
                     - 201901
                     - 201902
+          description: 'All the available time periods for the keyword data, usually the last 12 months.'
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      operationId: periods
+      summary: /periods (last 12 months as a list)
+      description: 'Get all the available time periods for the keyword data, usually the last 12 months.'
   /stats/keyword:
     get:
-      summary: /stats/keyword (for each engine/country_code)
-      description: 'Returns statistics about the whole dataset for a specific engine and country_code e.g. max, count, sum, avg.'
-      operationId: stats/keyword
       responses:
         '200':
-          description: All the statistics about the whole dataset e.g. total number of keywords. Please note that these statistics will vary based on the engine & country_code specified in the parameters.
           content:
             application/json:
               examples:
@@ -331,10 +330,14 @@ paths:
                     engine: google
                     country_code: global
                     volume: avg
+          description: All the statistics about the whole dataset e.g. total number of keywords. Please note that these statistics will vary based on the engine & country_code specified in the parameters.
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      operationId: stats/keyword
+      summary: /stats/keyword (for each engine/country_code)
+      description: 'Returns statistics about the whole dataset for a specific engine and country_code e.g. max, count, sum, avg.'
     parameters:
       - $ref: '#/components/parameters/engine'
       - $ref: '#/components/parameters/country_code'
@@ -342,12 +345,8 @@ paths:
       - $ref: '#/components/parameters/scale'
   /stats/link:
     get:
-      summary: /stats/link (Majestic link counts)
-      description: Returns statistics about the whole Majestic dataset.
-      operationId: stats/link
       responses:
         '200':
-          description: Returns statistics about the Majestic link dataset e.g. IAAT (in anchor and title).
           content:
             application/json:
               examples:
@@ -357,21 +356,18 @@ paths:
                     iaat_count: 82347238
                     iaat_sum: 26596478952
                     iaat_avg: 322
+          description: Returns statistics about the Majestic link dataset e.g. IAAT (in anchor and title).
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      operationId: stats/link
+      summary: /stats/link (Majestic link counts)
+      description: Returns statistics about the whole Majestic dataset.
   /fetch:
     post:
-      summary: /fetch (exact search volume for multiple seed terms)
-      description: 'Whereas /search takes one or more seeds terms and returns up to 2000 keyword suggestions, /fetch is more specific. This method allows you to enter up to 500 seeds and retrieve the search volume (and panelist volumes) for each of those seeds specifically.'
-      operationId: fetch
       responses:
         '200':
-          description: |-
-            Monthly search volume for one or more specific seed terms for an engine and a country_code
-             e.g. Google US. Also includes panelists per month, total volume, average volume for
-             last 12 months, total months seen and the query parameters.
           content:
             application/json:
               examples:
@@ -410,10 +406,17 @@ paths:
                       seeds: hello world
                       type: exact
                       sort: total
+          description: |-
+            Monthly search volume for one or more specific seed terms for an engine and a country_code
+             e.g. Google US. Also includes panelists per month, total volume, average volume for
+             last 12 months, total months seen and the query parameters.
         '401':
           $ref: '#/components/responses/AccessForbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      operationId: fetch
+      summary: /fetch (exact search volume for multiple seed terms)
+      description: 'Whereas /search takes one or more seeds terms and returns up to 2000 keyword suggestions, /fetch is more specific. This method allows you to enter up to 500 seeds and retrieve the search volume (and panelist volumes) for each of those seeds specifically.'
     parameters:
       - $ref: '#/components/parameters/seeds'
       - $ref: '#/components/parameters/engine'
@@ -441,46 +444,44 @@ components:
           type: string
   responses:
     AccessForbidden:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
       description: 'Access forbidden, invalid API key was used'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
-      description: Resource was not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+      description: Resource was not found
   parameters:
     seeds:
       name: seeds
-      in: query
       description: |-
         One or more strings (max 100). If entering a single seed then simply specify seeds=dog and if multiple then please use a list format e.g. seeds='dog','dog training'.
         Think of `seeds` as one or more of your starter ideas to get going with e.g. 'chocolate' or 'dog training'. This is a separate concept from keywords which are returned in the results and which show exactly what people are typing into the search boxes of the engines like Google. With some analysis some of these results will become your key words aka `keywords`.
-      required: true
       schema:
         type: array
         items: {}
+      in: query
+      required: true
     engine:
       name: engine
-      in: query
       description: 'The engine that you want keyword suggestions and monthly volumes for. Default: `google`.'
-      required: true
       schema:
         enum:
           - google
           - youtube
           - amazon
           - ebay
+      in: query
+      required: true
     country_code:
       name: country_code
-      in: query
       description: |-
         Specifies the territory to search within. Two letter ISO 3166-2 country code or `GL` for global. 
         Global means all ALL countries combined together. `US` is United States and `GB` is Great Britain (United Kingdom). Default: `GL`.
-      required: true
       schema:
         enum:
           - GL
@@ -589,9 +590,10 @@ components:
           - VN
           - ZA
           - ZW
+      in: query
+      required: true
     type:
       name: type
-      in: query
       description: |-
         ### Broadest
 
@@ -628,57 +630,67 @@ components:
         Allows you to use the * and ? characters to specify a wildcard. E.g. tr* returns:
         * dog training
         * training your dog
-      required: true
       schema:
         enum:
           - broadest
           - broad
           - phrase
           - wildcard
+      in: query
+      required: true
     sort:
       name: sort
-      in: query
       description: |-
         How you'd like to sort the results. Default `total`.
         Total: Total searches for the last 12 months which means total search volume for Jan + Feb + Mar etc.
         Avg: Average searches for the last 12 months which means the total search volume for all 12 months / 12.
-      required: true
       schema:
         enum:
           - total
           - avg
+      in: query
+      required: true
+    start:
+      name: start
+      description: |-
+        Which row would you like results to be returned from.
+        An integer between 1 (min) and max results in the query.
+      schema:
+        type: integer
+      in: query
+      required: true
     limit:
       name: limit
-      in: query
       description: |-
         The maximum number of results which will be returned from the query.
         An integer between 1 and 2000 (max).
-      required: true
       schema:
         type: integer
+      in: query
+      required: true
     scale:
       name: scale
-      in: query
       description: Scale the raw keyword sample volumes to match the engine's estimated search volumes.
-      required: true
       schema:
         type: boolean
+      in: query
+      required: true
     majestic:
       name: majestic
-      in: query
       description: Add Majestic (www.majestic.com) link count metrics.
-      required: true
       schema:
         type: boolean
+      in: query
+      required: true
     volume:
       name: volume
-      in: query
       description: Which volume to use for the last 12 months. I.e. the total for the last 12 months or the average.
-      required: true
       schema:
         enum:
           - total
           - avg
+      in: query
+      required: true
   securitySchemes:
     app_key:
       type: apiKey
