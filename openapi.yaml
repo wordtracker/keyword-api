@@ -7,7 +7,7 @@ info:
     ## Introduction
 
     ### Raw Google, YouTube, Amazon, eBay keyword search data
-    The `Wordtracker Keyword API 2.0` provides keywords and associated search volumes for a range of sources, including Google, YouTube, Amazon and eBay from 106 countries. This data comes from a ~18 million global anonymized panel supplied by [DDMR](https://ddmr.com) which makes it a very reliable, clean source of keywords (2.06 billion unique keywords from 5.5 billion searches). To use the API you will first need to [sign up here](https://wordtracker.3scale.net). For pricing and more general information, please take a [look here](https://www.wordtracker.com/api). 
+    The `Wordtracker Keyword API 2.0` provides keywords and associated search volumes for a range of sources, including Google, YouTube, Amazon and eBay from 106 countries. This data comes from a ~18 million global anonymized panel aka the [clickstream](https://www.wordtracker.com/blog/keyword-research/what-is-clickstream-data), which makes it a very reliable, clean source of keywords (2.06 billion unique keywords from 5.5 billion searches). To use the API you will first need to [sign up here](https://wordtracker.3scale.net). For pricing and more general information, please take a [look here](https://www.wordtracker.com/api). 
 
     Please note that this is v2 of the Wordtracker Keyword API and currently includes keywords and search volumes from:
     - Google
