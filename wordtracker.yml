@@ -8,18 +8,19 @@ info:
     \ keyword search data\nThe `Wordtracker Keyword API 2.0` provides keywords and\
     \ associated search volumes for a range of sources, including Google, YouTube,\
     \ Amazon and eBay from 106 countries. This data comes from a ~18 million global\
-    \ anonymized panel supplied by [DDMR](https://ddmr.com) which makes it a very\
-    \ reliable, clean source of keywords (2.06 billion unique keywords from 5.5 billion\
-    \ searches). To use the API you will first need to [sign up here](https://wordtracker.3scale.net).\
-    \ For pricing and more general information, please take a [look here](https://www.wordtracker.com/api).\
-    \ \n\nPlease note that this is v2 of the Wordtracker Keyword API and currently\
-    \ includes keywords and search volumes from:\n- Google\n- YouTube\n- Amazon\n\
-    - eBay\n \nWe have search volumes for over 106 countries including (but not limited\
-    \ to):\n- Global (GL) (all countries merged together)\n- United States (US), Canada\
-    \ (CA), United Kingdom (GB), \n- Australia (AU), New Zealand (NZ), Brazil (BR),\
-    \ Germany (DE), \n- Spain (ES), France (FR), India (IN), Italy (IT), Mexico (MX),\n\
-    - Netherlands (NL), Turkey (TR), South Africa (ZA)\n\nFor the full list please\
-    \ see this spreadsheet [Wordtracker keyword API 2.0 | Countries](https://docs.google.com/spreadsheets/d/1GCMXn_l4K5QYg8ijj9Asb9iPtvaep1TmAL2MKwhQIIw/edit#gid=0)\n\
+    \ anonymized panel aka the [clickstream](https://www.wordtracker.com/blog/keyword-research/what-is-clickstream-data),\
+    \ which makes it a very reliable, clean source of keywords (2.06 billion unique\
+    \ keywords from 5.5 billion searches). To use the API you will first need to [sign\
+    \ up here](https://wordtracker.3scale.net). For pricing and more general information,\
+    \ please take a [look here](https://www.wordtracker.com/api). \n\nPlease note\
+    \ that this is v2 of the Wordtracker Keyword API and currently includes keywords\
+    \ and search volumes from:\n- Google\n- YouTube\n- Amazon\n- eBay\n \nWe have\
+    \ search volumes for over 106 countries including (but not limited to):\n- Global\
+    \ (GL) (all countries merged together)\n- United States (US), Canada (CA), United\
+    \ Kingdom (GB), \n- Australia (AU), New Zealand (NZ), Brazil (BR), Germany (DE),\
+    \ \n- Spain (ES), France (FR), India (IN), Italy (IT), Mexico (MX),\n- Netherlands\
+    \ (NL), Turkey (TR), South Africa (ZA)\n\nFor the full list please see this spreadsheet\
+    \ [Wordtracker keyword API 2.0 | Countries](https://docs.google.com/spreadsheets/d/1GCMXn_l4K5QYg8ijj9Asb9iPtvaep1TmAL2MKwhQIIw/edit#gid=0)\n\
     \n## Get going in 10 minutes!\nFirst [register for an API account](https://wordtracker.3scale.net)\
     \ (30 day free trial available). You can then find the production ready Wordtracker\
     \ Keyword API 2.0 server at: https://api.lc.wordtracker.com\n\nPlease make sure\
