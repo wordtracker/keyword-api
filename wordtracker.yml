@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Wordtracker Keyword API
   version: 2.0.5
-  description: "*First release: 09.04.19, last API release: 13.04.20, last API docs\
+  description: "*First release: 09.04.19, last API release: 12.04.20, last API docs\
     \ release: 13.04.20*\n## Introduction\n\n### Raw Google, YouTube, Amazon, eBay\
     \ keyword search data\nThe `Wordtracker Keyword API 2.0` provides keywords and\
     \ associated search volumes for a range of sources, including Google (168 countries),\
@@ -44,7 +44,7 @@ info:
     \ database to allow you to see how much competition there is online for a given\
     \ keyword. Keywords with high search volumes and a low link footprint present\
     \ good SEO opportunities. \nNote: These metrics cover both 'on page' (title tag)\
-    \ and 'off page' (incomingl links).\n\nIf the 'majestic' parameter is set to True,\
+    \ and 'off page' (incoming links).\n\nIf the 'majestic' parameter is set to True,\
     \ the following additional [MajesticSEO](http://www.majestic.com) link count metrics\
     \ are available:\n\n1. **exact_urls_in_title:** Number of URLs that contain the\
     \ exact keyword phrase within the title tag. E.g. for the keyword 'dog training'\
@@ -76,13 +76,12 @@ info:
     \ tag & also in the external anchor text of at least one backlink.\n14. **broad_domains_in_anchor_and_in_title**:\
     \ Number of root domains (not URLs) that contain all the words in any order within\
     \ the external anchor text of at least one backlink and the title tag.\n\n## Releases\
-    \  \n- **2.0.0**: 09.04.19: First release.\n- **2.0.1**: 23.04.19: Add Majestic\
-    \ link metrics.\n- **2.0.2**: 30.04.19: Add /stats/keyword and /stats/link calls.\n\
-    - **2.0.3**: 06.05.19: Add 106 countries, change country parameter to country_code,\
-    \ use ISO-3166-2 standard.\n- **2.0.4**: 03.07.19: Add `start` paramater to /search\
-    \ and /top calls to allow pagination.\n- **2.0.5**: 13.04.20: Add second clickstream\
-    \ source, increase available countries to 168, plus GL (global) which aggregates\
-    \ ALL countries together.\n"
+    \  \n- **2.0.5**: 13.04.20: Add second clickstream source, now 168 countries incl.\
+    \ GL (global) for ALL countries.\n- **2.0.4**: 03.07.19: Add `start` paramater\
+    \ to /search and /top calls to allow pagination.\n- **2.0.3**: 06.05.19: Add 106\
+    \ countries, change country parameter to country_code, use ISO-3166-2 standard.\n\
+    - **2.0.2**: 30.04.19: Add /stats/keyword and /stats/link calls.\n- **2.0.1**:\
+    \ 23.04.19: Add Majestic link metrics.\n- **2.0.0**: 09.04.19: First release.\n"
   termsOfService: https://www.wordtracker.com/terms
   contact:
     name: Wordtracker API Team
@@ -355,10 +354,10 @@ paths:
               examples:
                 result:
                   value:
-                    max: 1403542
-                    count: 82347238
-                    sum: 230272251
-                    avg: 2
+                    max: 5551205
+                    count: 265407303
+                    sum: 813533971
+                    avg: 3
                     engine: google
                     country_code: global
                     volume: avg
@@ -387,10 +386,10 @@ paths:
               examples:
                 result:
                   value:
-                    iaat_max: 58915327
-                    iaat_count: 82347238
-                    iaat_sum: 26596478952
-                    iaat_avg: 322
+                    iaat_max: 105312510962
+                    iaat_count: 100000000
+                    iaat_sum: 355318294412
+                    iaat_avg: 3553
           description: Returns statistics about the Majestic link dataset e.g. IAAT
             (in anchor and title).
         "401":
@@ -785,7 +784,7 @@ components:
     scale:
       name: scale
       description: Scale the raw keyword sample volumes to match the engine's estimated
-        search volumes.
+        search volumes (Google, Amazon, YouTube and eBay).
       schema:
         type: boolean
       in: query
