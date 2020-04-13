@@ -2,13 +2,13 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Wordtracker Keyword API",
-    "version": "2.0.4",
-    "description": "*First release: 09.04.19, last API release: 03.07.19, last API docs release: 03.07.19*\n## Introduction\n\n### Raw Google, YouTube, Amazon, eBay keyword search data\nThe `Wordtracker Keyword API 2.0` provides keywords and associated search volumes for a range of sources, including Google, YouTube, Amazon and eBay from 106 countries. This data comes from a ~18 million global anonymized panel aka the [clickstream](https://www.wordtracker.com/blog/keyword-research/what-is-clickstream-data), which makes it a very reliable, clean source of keywords (2.06 billion unique keywords from 5.5 billion searches). To use the API you will first need to [sign up here](https://wordtracker.3scale.net). For pricing and more general information, please take a [look here](https://www.wordtracker.com/api). \n\nPlease note that this is v2 of the Wordtracker Keyword API and currently includes keywords and search volumes from:\n- Google\n- YouTube\n- Amazon\n- eBay\n \nWe have search volumes for over 106 countries including (but not limited to):\n- Global (GL) (all countries merged together)\n- United States (US), Canada (CA), United Kingdom (GB), \n- Australia (AU), New Zealand (NZ), Brazil (BR), Germany (DE), \n- Spain (ES), France (FR), India (IN), Italy (IT), Mexico (MX),\n- Netherlands (NL), Turkey (TR), South Africa (ZA)\n\nFor the full list please see this spreadsheet [Wordtracker keyword API 2.0 | Countries](https://docs.google.com/spreadsheets/d/1GCMXn_l4K5QYg8ijj9Asb9iPtvaep1TmAL2MKwhQIIw/edit#gid=0)\n\n## Get going in 10 minutes!\nFirst [register for an API account](https://wordtracker.3scale.net) (30 day free trial available). You can then find the production ready Wordtracker Keyword API 2.0 server at: https://api.lc.wordtracker.com\n\nPlease make sure you add the `app_id` and `app_key` as authorisation.\nHere's an example [REST url](https://api.lc.wordtracker.com/v2/search?engine=google&country=us&seeds=dog&limit=10&type=broad&app_id=your_app_id&app_key=your_key) to query the /search method. \n\nPlease note: If the above url does not work, please check the version e.g. /v2, /v2.1 etc. You can also see the latest urls at https://api.lc.wordtracker.com.\n### Please choose from these options\n* [Register for an API account (30 day free trial available)](https://wordtracker.3scale.net)\n* [API pricing](http://www.wordtracker.com/api)\n* [Try the data out in the Wordtracker keyword tool](http://www.wordtracker.com)\n\n\n\n## Available metrics\n### Monthly keyword search volumes\nPlease note that we use a 12 month rolling window for monthly search volumes. This means that as a new month begins, the last 12 months of data is re-processed up until the close of the previous month. E.g. if today is May 1st then a new 12 month rolling window is created from May 2018 - Apr 2019. That also means you will see search volumes and # panelists for each of those last 12 months as well as a total volume & average volume for all months. \n\n### Majestic SEO link counts\nWordtracker have partnered with [MajesticSEO](http://www.majestic.com) who have the planet's largest Link Index database. Our 'global Google' keyword list has been matched against Majestic's database to allow you to see how much competition there is online for a given keyword. Keywords with high search volumes and a low link footprint present good SEO opportunities. \nNote: These metrics cover both 'on page' (title tag) and 'off page' (incomingl links).\n\nIf the 'majestic' parameter is set to True, the following additional [MajesticSEO](http://www.majestic.com) link count metrics are available:\n\n1. **exact_urls_in_title:** Number of URLs that contain the exact keyword phrase within the title tag. E.g. for the keyword 'dog training' this would match 'dog training' and 'i love dog training' but not 'training my dog'.    \n2. **exact_domains_in_title:** Number of unique root domains (not URLs) that contain the exact keyword phrase within the title tag.\n3. **exact_urls_in_url**: Number of URLs that contain the exact keyword phrase within the URL. E.g. for the keyword 'dog training', this would match http://www.domain.com/dog-training-is-cool.html or http://www.dog-training.com.\n4. **exact_domains_in_url**: Number of unique root domains (not URLs) that contain the exact keyword phrase in the url belonging to that root domain.\n5. **exact_urls_in_anchor**: Number of URLs that contain the exact keyword phrase within the external anchor text of at least one backlink.\n6. **exact_domains_in_anchor**: Number of root domains (not URLs) that contain the exact keyword phrase within the external anchor text of at least one backlink.\n7. **exact_urls_in_anchor_and_in_title**: Number of URLs that contain the exact keyword phrase within both within the title tag & also in the external anchor text of at least one backlink.\n8. **exact_domains_in_anchor_and_in_title**: Number of root domains (not URLs) that contain the exact keyword phrase within both the external anchor text of at least one backlink and within the title tag.\n9. **broad_urls_in_title**: Number of URLs that contain all the words in any order within the title tag. E.g. for the keyword 'dog training' this would match 'training my dog'.\n10. **broad_domains_in_title**: Number of unique root domains (not URLs) that contain all the words in any order within the title tag.\n11. **broad_urls_in_anchor**: Number of URLs that contain all the words in any order in the external anchor text of at least one backlink.\n12. **broad_domains_in_anchor**: Number of root domains (not URLs) that contain all the words in any order within the external anchor text of at least one backlink.\n13. **broad_urls_in_anchor_and_in_title**: Number of URLs that contain all the words in any order, both within the title tag & also in the external anchor text of at least one backlink.\n14. **broad_domains_in_anchor_and_in_title**: Number of root domains (not URLs) that contain all the words in any order within the external anchor text of at least one backlink and the title tag.\n\n## Releases  \n- **2.0.0**: 09.04.19: First release.\n- **2.0.1**: 23.04.19: Add Majestic link metrics.\n- **2.0.2**: 30.04.19: Add /stats/keyword and /stats/link calls.\n- **2.0.3**: 06.05.19: Add 106 countries, change country parameter to country_code, use ISO-3166-2 standard.\n- **2.0.4**: 03.07.19: Add `start` paramater to /search and /top calls to allow pagination.\n\n",
+    "version": "2.0.5",
+    "description": "*First release: 09.04.19, last API release: 13.04.20, last API docs release: 13.04.20*\n## Introduction\n\n### Raw Google, YouTube, Amazon, eBay keyword search data\nThe `Wordtracker Keyword API 2.0` provides keywords and associated search volumes for a range of sources, including Google (168 countries), YouTube, Amazon and eBay (106 countries). This data comes from multiple clickstream data sources including a ~18 million global anonymized panel aka the [clickstream](https://www.wordtracker.com/blog/keyword-research/what-is-clickstream-data), which makes it a very reliable, clean source of keywords (upwards of 2.06 billion unique keywords from 5.5 billion searches). To use the API you will first need to [sign up here](https://wordtracker.3scale.net). For pricing and more general information, please take a [look here](https://www.wordtracker.com/api). \n\nPlease note that this is v2.0.5 of the Wordtracker Keyword API and currently includes keywords and search volumes from:\n- Google\n- YouTube\n- Amazon\n- eBay\n \nWe have search volumes for over 168 countries including (but not limited to):\n- Global (GL) (all countries merged together)\n- United States (US), Canada (CA), United Kingdom (GB), \n- Australia (AU), New Zealand (NZ), Brazil (BR), Germany (DE), \n- Spain (ES), France (FR), India (IN), Italy (IT), Mexico (MX),\n- Netherlands (NL), Turkey (TR), South Africa (ZA)\n\nFor the full list please see this spreadsheet [Wordtracker keyword API 2.0 | Countries](https://docs.google.com/spreadsheets/d/1GCMXn_l4K5QYg8ijj9Asb9iPtvaep1TmAL2MKwhQIIw/edit#gid=0)\n\n## Get going in 10 minutes!\nFirst [register for an API account](https://wordtracker.3scale.net) (30 day free trial available). You can then find the production ready Wordtracker Keyword API 2.0 server at: https://api.lc.wordtracker.com\n\nPlease make sure you add the `app_id` and `app_key` as authorisation.\nHere's an example [REST url](https://api.lc.wordtracker.com/v2/search?engine=google&country=us&seeds=dog&limit=10&type=broad&app_id=your_app_id&app_key=your_key) to query the /search method. \n\nPlease note: If the above url does not work, please check the version e.g. /v2, /v2.1 etc. You can also see the latest urls at https://api.lc.wordtracker.com.\n### Please choose from these options\n* [Register for an API account (30 day free trial available)](https://wordtracker.3scale.net)\n* [API pricing](http://www.wordtracker.com/api)\n* [Try the data out in the Wordtracker keyword tool](http://www.wordtracker.com)\n\n\n\n## Available metrics\n### Monthly keyword search volumes\nPlease note that we use a 12 month rolling window for monthly search volumes. This means that as a new month begins, the last 12 months of data is re-processed up until the close of the previous month. E.g. if today is Dec 1st 2020 then a new 12 month rolling window is created from Dec 2019 - Nov 2020. That also means you will see search volumes and # panelists for each of those last 12 months as well as a total volume & average volume for all months. \n\n### Majestic SEO link counts\nWordtracker have partnered with [MajesticSEO](http://www.majestic.com) who have the planet's largest Link Index database. Our 'global Google' keyword list has been matched against Majestic's database to allow you to see how much competition there is online for a given keyword. Keywords with high search volumes and a low link footprint present good SEO opportunities. \nNote: These metrics cover both 'on page' (title tag) and 'off page' (incomingl links).\n\nIf the 'majestic' parameter is set to True, the following additional [MajesticSEO](http://www.majestic.com) link count metrics are available:\n\n1. **exact_urls_in_title:** Number of URLs that contain the exact keyword phrase within the title tag. E.g. for the keyword 'dog training' this would match 'dog training' and 'i love dog training' but not 'training my dog'.    \n2. **exact_domains_in_title:** Number of unique root domains (not URLs) that contain the exact keyword phrase within the title tag.\n3. **exact_urls_in_url**: Number of URLs that contain the exact keyword phrase within the URL. E.g. for the keyword 'dog training', this would match http://www.domain.com/dog-training-is-cool.html or http://www.dog-training.com.\n4. **exact_domains_in_url**: Number of unique root domains (not URLs) that contain the exact keyword phrase in the url belonging to that root domain.\n5. **exact_urls_in_anchor**: Number of URLs that contain the exact keyword phrase within the external anchor text of at least one backlink.\n6. **exact_domains_in_anchor**: Number of root domains (not URLs) that contain the exact keyword phrase within the external anchor text of at least one backlink.\n7. **exact_urls_in_anchor_and_in_title**: Number of URLs that contain the exact keyword phrase within both within the title tag & also in the external anchor text of at least one backlink.\n8. **exact_domains_in_anchor_and_in_title**: Number of root domains (not URLs) that contain the exact keyword phrase within both the external anchor text of at least one backlink and within the title tag.\n9. **broad_urls_in_title**: Number of URLs that contain all the words in any order within the title tag. E.g. for the keyword 'dog training' this would match 'training my dog'.\n10. **broad_domains_in_title**: Number of unique root domains (not URLs) that contain all the words in any order within the title tag.\n11. **broad_urls_in_anchor**: Number of URLs that contain all the words in any order in the external anchor text of at least one backlink.\n12. **broad_domains_in_anchor**: Number of root domains (not URLs) that contain all the words in any order within the external anchor text of at least one backlink.\n13. **broad_urls_in_anchor_and_in_title**: Number of URLs that contain all the words in any order, both within the title tag & also in the external anchor text of at least one backlink.\n14. **broad_domains_in_anchor_and_in_title**: Number of root domains (not URLs) that contain all the words in any order within the external anchor text of at least one backlink and the title tag.\n\n## Releases  \n- **2.0.0**: 09.04.19: First release.\n- **2.0.1**: 23.04.19: Add Majestic link metrics.\n- **2.0.2**: 30.04.19: Add /stats/keyword and /stats/link calls.\n- **2.0.3**: 06.05.19: Add 106 countries, change country parameter to country_code, use ISO-3166-2 standard.\n- **2.0.4**: 03.07.19: Add `start` paramater to /search and /top calls to allow pagination.\n- **2.0.5**: 13.04.20: Add second clickstream source, increase available countries to 168, plus GL (global) which aggregates ALL countries together.\n",
     "termsOfService": "https://www.wordtracker.com/terms",
     "contact": {
       "name": "Wordtracker API Team",
       "url": "http://www.wordtracker.com",
-      "email": "developers@wordtracker.com"
+      "email": "devops@wordtracker.com"
     },
     "license": {
       "name": "Apache 2.0",
@@ -44,36 +44,36 @@
                           "volume_by_month": [
                             {
                               "volume": 2336,
-                              "year": "2018",
-                              "month": "03"
+                              "year": "2019",
+                              "month": "09"
                             },
                             {
                               "volume": 2486,
-                              "year": "2018",
-                              "month": "04"
+                              "year": "2019",
+                              "month": "10"
                             },
                             {
                               "volume": 2410,
-                              "year": "2018",
-                              "month": "05"
+                              "year": "2019",
+                              "month": "11"
                             },
                             "..."
                           ],
                           "panelist_ids_by_month": [
                             {
                               "ids": 1440,
-                              "year": "2018",
-                              "month": "03"
+                              "year": "2019",
+                              "month": "09"
                             },
                             {
                               "ids": 1384,
-                              "year": "2018",
-                              "month": "04"
+                              "year": "2019",
+                              "month": "10"
                             },
                             {
                               "ids": 1263,
-                              "year": "2018",
-                              "month": "05"
+                              "year": "2019",
+                              "month": "11"
                             },
                             "..."
                           ],
@@ -86,36 +86,36 @@
                           "volume_by_month": [
                             {
                               "volume": 476,
-                              "year": "2018",
-                              "month": "03"
+                              "year": "2019",
+                              "month": "09"
                             },
                             {
                               "volume": 424,
-                              "year": "2018",
-                              "month": "04"
+                              "year": "2019",
+                              "month": "10"
                             },
                             {
                               "volume": 373,
-                              "year": "2018",
-                              "month": "05"
+                              "year": "2019",
+                              "month": "11"
                             },
                             "..."
                           ],
                           "panelist_ids_by_month": [
                             {
                               "ids": 296,
-                              "year": "2018",
-                              "month": "03"
+                              "year": "2019",
+                              "month": "09"
                             },
                             {
                               "ids": 233,
-                              "year": "2018",
-                              "month": "04"
+                              "year": "2019",
+                              "month": "10"
                             },
                             {
                               "ids": 198,
-                              "year": "2018",
-                              "month": "05"
+                              "year": "2019",
+                              "month": "11"
                             },
                             "..."
                           ],
@@ -131,6 +131,11 @@
                         "limit": 10,
                         "type": "broad",
                         "sort": "total"
+                      },
+                      "stats": {
+                        "possible_results": 19264,
+                        "results": 100,
+                        "elapsed": "0.0571s"
                       }
                     }
                   }
@@ -197,36 +202,36 @@
                           "volume_by_month": [
                             {
                               "volume": 133346,
-                              "year": "2018",
-                              "month": "03"
+                              "year": "2019",
+                              "month": "09"
                             },
                             {
                               "volume": 124478,
-                              "year": "2018",
-                              "month": "04"
+                              "year": "2019",
+                              "month": "10"
                             },
                             {
                               "volume": 121125,
-                              "year": "2018",
-                              "month": "05"
+                              "year": "2019",
+                              "month": "11"
                             },
                             "..."
                           ],
                           "panelist_ids_by_month": [
                             {
                               "ids": 49189,
-                              "year": "2018",
-                              "month": "03"
+                              "year": "2019",
+                              "month": "09"
                             },
                             {
                               "ids": 42654,
-                              "year": "2018",
-                              "month": "04"
+                              "year": "2019",
+                              "month": "10"
                             },
                             {
                               "ids": 38276,
-                              "year": "2018",
-                              "month": "05"
+                              "year": "2019",
+                              "month": "11"
                             },
                             "..."
                           ],
@@ -239,36 +244,36 @@
                           "volume_by_month": [
                             {
                               "volume": 89668,
-                              "year": "2018",
-                              "month": "03"
+                              "year": "2019",
+                              "month": "09"
                             },
                             {
                               "volume": 85709,
-                              "year": "2018",
-                              "month": "04"
+                              "year": "2019",
+                              "month": "10"
                             },
                             {
                               "volume": 84670,
-                              "year": "2018",
-                              "month": "05"
+                              "year": "2019",
+                              "month": "11"
                             },
                             "..."
                           ],
                           "panelist_ids_by_month": [
                             {
                               "ids": 29843,
-                              "year": "2018",
-                              "month": "03"
+                              "year": "2019",
+                              "month": "09"
                             },
                             {
                               "ids": 25751,
-                              "year": "2018",
-                              "month": "04"
+                              "year": "2019",
+                              "month": "10"
                             },
                             {
                               "ids": 23864,
-                              "year": "2018",
-                              "month": "05"
+                              "year": "2019",
+                              "month": "11"
                             },
                             "..."
                           ],
@@ -280,6 +285,11 @@
                         "country_code": "us",
                         "limit": 10,
                         "sort": "total"
+                      },
+                      "stats": {
+                        "possible_results": 19264,
+                        "results": 100,
+                        "elapsed": "0.0571s"
                       }
                     }
                   }
@@ -379,18 +389,18 @@
                 "examples": {
                   "result": {
                     "value": [
-                      201803,
-                      201804,
-                      201805,
-                      201806,
-                      201807,
-                      201808,
-                      201809,
-                      201810,
-                      201811,
-                      201812,
-                      201901,
-                      201902
+                      201902,
+                      201903,
+                      201904,
+                      201905,
+                      201906,
+                      201907,
+                      201908,
+                      201909,
+                      201910,
+                      201911,
+                      201912,
+                      202001
                     ]
                   }
                 }
@@ -508,36 +518,36 @@
                           "volume_by_month": [
                             {
                               "volume": 93,
-                              "year": "2018",
-                              "month": "03"
+                              "year": "2019",
+                              "month": "09"
                             },
                             {
                               "volume": 89,
-                              "year": "2018",
-                              "month": "04"
+                              "year": "2019",
+                              "month": "10"
                             },
                             {
                               "volume": 113,
-                              "year": "2018",
-                              "month": "05"
+                              "year": "2019",
+                              "month": "11"
                             },
                             "..."
                           ],
                           "panelist_ids_by_month": [
                             {
                               "ids": 59,
-                              "year": "2018",
-                              "month": "03"
+                              "year": "2019",
+                              "month": "09"
                             },
                             {
                               "ids": 49,
-                              "year": "2018",
-                              "month": "04"
+                              "year": "2019",
+                              "month": "10"
                             },
                             {
                               "ids": 58,
-                              "year": "2018",
-                              "month": "05"
+                              "year": "2019",
+                              "month": "11"
                             },
                             "..."
                           ],
@@ -550,6 +560,11 @@
                         "seeds": "hello world",
                         "type": "exact",
                         "sort": "total"
+                      },
+                      "stats": {
+                        "possible_results": 10,
+                        "results": 10,
+                        "elapsed": "0.0571s"
                       }
                     }
                   }
@@ -670,29 +685,45 @@
           "enum": [
             "GL",
             "US",
-            "CA",
-            "GB",
-            "AU",
-            "NZ",
+            "AD",
             "AE",
+            "AF",
+            "AG",
+            "AL",
             "AM",
+            "AO",
             "AR",
             "AT",
+            "AU",
+            "AW",
             "AZ",
+            "BA",
+            "BB",
             "BD",
             "BE",
             "BG",
+            "BH",
+            "BJ",
+            "BN",
             "BO",
             "BR",
+            "BS",
+            "BW",
             "BY",
+            "BZ",
             "CA",
+            "CD",
             "CH",
             "CI",
             "CL",
             "CM",
             "CN",
             "CO",
+            "CR",
             "CU",
+            "CV",
+            "CW",
+            "CY",
             "CZ",
             "DE",
             "DK",
@@ -704,14 +735,25 @@
             "ES",
             "ET",
             "FI",
+            "FJ",
+            "FO",
             "FR",
+            "GA",
+            "GB",
+            "GD",
             "GE",
+            "GF",
             "GH",
+            "GI",
+            "GP",
             "GR",
             "GT",
+            "GU",
+            "GY",
             "HK",
             "HN",
             "HR",
+            "HT",
             "HU",
             "ID",
             "IE",
@@ -719,60 +761,96 @@
             "IN",
             "IQ",
             "IR",
+            "IS",
             "IT",
+            "JM",
             "JO",
             "JP",
             "KE",
             "KG",
             "KH",
+            "KN",
             "KR",
             "KW",
+            "KY",
             "KZ",
+            "LA",
             "LB",
+            "LC",
             "LK",
             "LT",
+            "LU",
             "LV",
             "LY",
             "MA",
+            "MC",
             "MD",
+            "ME",
             "MG",
+            "MK",
             "MM",
             "MN",
+            "MQ",
+            "MT",
+            "MU",
+            "MV",
             "MX",
             "MY",
+            "MZ",
+            "NA",
+            "NC",
             "NG",
+            "NI",
             "NL",
             "NO",
             "NP",
+            "NZ",
             "OM",
+            "PA",
             "PE",
+            "PF",
             "PH",
             "PK",
             "PL",
+            "PR",
             "PS",
             "PT",
+            "PY",
+            "QA",
+            "RE",
             "RO",
             "RS",
             "RU",
+            "RW",
             "SA",
             "SE",
             "SG",
+            "SI",
             "SK",
             "SN",
+            "SR",
             "SV",
-            "SY",
+            "TG",
             "TH",
+            "TJ",
             "TN",
             "TR",
+            "TT",
             "TW",
             "TZ",
             "UA",
             "UG",
             "UY",
             "UZ",
+            "VC",
             "VE",
+            "VI",
             "VN",
+            "XK",
+            "YE",
+            "YT",
             "ZA",
+            "ZM",
             "ZW"
           ]
         },

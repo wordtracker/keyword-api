@@ -1,21 +1,21 @@
 openapi: 3.0.2
 info:
   title: Wordtracker Keyword API
-  version: 2.0.4
-  description: |+
-    *First release: 09.04.19, last API release: 03.07.19, last API docs release: 03.07.19*
+  version: 2.0.5
+  description: |
+    *First release: 09.04.19, last API release: 13.04.20, last API docs release: 13.04.20*
     ## Introduction
 
     ### Raw Google, YouTube, Amazon, eBay keyword search data
-    The `Wordtracker Keyword API 2.0` provides keywords and associated search volumes for a range of sources, including Google, YouTube, Amazon and eBay from 106 countries. This data comes from a ~18 million global anonymized panel aka the [clickstream](https://www.wordtracker.com/blog/keyword-research/what-is-clickstream-data), which makes it a very reliable, clean source of keywords (2.06 billion unique keywords from 5.5 billion searches). To use the API you will first need to [sign up here](https://wordtracker.3scale.net). For pricing and more general information, please take a [look here](https://www.wordtracker.com/api). 
+    The `Wordtracker Keyword API 2.0` provides keywords and associated search volumes for a range of sources, including Google (168 countries), YouTube, Amazon and eBay (106 countries). This data comes from multiple clickstream data sources including a ~18 million global anonymized panel aka the [clickstream](https://www.wordtracker.com/blog/keyword-research/what-is-clickstream-data), which makes it a very reliable, clean source of keywords (upwards of 2.06 billion unique keywords from 5.5 billion searches). To use the API you will first need to [sign up here](https://wordtracker.3scale.net). For pricing and more general information, please take a [look here](https://www.wordtracker.com/api). 
 
-    Please note that this is v2 of the Wordtracker Keyword API and currently includes keywords and search volumes from:
+    Please note that this is v2.0.5 of the Wordtracker Keyword API and currently includes keywords and search volumes from:
     - Google
     - YouTube
     - Amazon
     - eBay
      
-    We have search volumes for over 106 countries including (but not limited to):
+    We have search volumes for over 168 countries including (but not limited to):
     - Global (GL) (all countries merged together)
     - United States (US), Canada (CA), United Kingdom (GB), 
     - Australia (AU), New Zealand (NZ), Brazil (BR), Germany (DE), 
@@ -40,7 +40,7 @@ info:
 
     ## Available metrics
     ### Monthly keyword search volumes
-    Please note that we use a 12 month rolling window for monthly search volumes. This means that as a new month begins, the last 12 months of data is re-processed up until the close of the previous month. E.g. if today is May 1st then a new 12 month rolling window is created from May 2018 - Apr 2019. That also means you will see search volumes and # panelists for each of those last 12 months as well as a total volume & average volume for all months. 
+    Please note that we use a 12 month rolling window for monthly search volumes. This means that as a new month begins, the last 12 months of data is re-processed up until the close of the previous month. E.g. if today is Dec 1st 2020 then a new 12 month rolling window is created from Dec 2019 - Nov 2020. That also means you will see search volumes and # panelists for each of those last 12 months as well as a total volume & average volume for all months. 
 
     ### Majestic SEO link counts
     Wordtracker have partnered with [MajesticSEO](http://www.majestic.com) who have the planet's largest Link Index database. Our 'global Google' keyword list has been matched against Majestic's database to allow you to see how much competition there is online for a given keyword. Keywords with high search volumes and a low link footprint present good SEO opportunities. 
@@ -69,12 +69,12 @@ info:
     - **2.0.2**: 30.04.19: Add /stats/keyword and /stats/link calls.
     - **2.0.3**: 06.05.19: Add 106 countries, change country parameter to country_code, use ISO-3166-2 standard.
     - **2.0.4**: 03.07.19: Add `start` paramater to /search and /top calls to allow pagination.
-
+    - **2.0.5**: 13.04.20: Add second clickstream source, increase available countries to 168, plus GL (global) which aggregates ALL countries together.
   termsOfService: 'https://www.wordtracker.com/terms'
   contact:
     name: Wordtracker API Team
     url: 'http://www.wordtracker.com'
-    email: developers@wordtracker.com
+    email: devops@wordtracker.com
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
@@ -101,25 +101,25 @@ paths:
                         avg_volume_for_last_12_months: 2105
                         volume_by_month:
                           - volume: 2336
-                            year: '2018'
-                            month: '03'
+                            year: '2019'
+                            month: 09
                           - volume: 2486
-                            year: '2018'
-                            month: '04'
+                            year: '2019'
+                            month: '10'
                           - volume: 2410
-                            year: '2018'
-                            month: '05'
+                            year: '2019'
+                            month: '11'
                           - ...
                         panelist_ids_by_month:
                           - ids: 1440
-                            year: '2018'
-                            month: '03'
+                            year: '2019'
+                            month: 09
                           - ids: 1384
-                            year: '2018'
-                            month: '04'
+                            year: '2019'
+                            month: '10'
                           - ids: 1263
-                            year: '2018'
-                            month: '05'
+                            year: '2019'
+                            month: '11'
                           - ...
                         total_months_seen: 12
                       - keyword: mozilla firefox
@@ -127,25 +127,25 @@ paths:
                         avg_volume_for_last_12_months: 334
                         volume_by_month:
                           - volume: 476
-                            year: '2018'
-                            month: '03'
+                            year: '2019'
+                            month: 09
                           - volume: 424
-                            year: '2018'
-                            month: '04'
+                            year: '2019'
+                            month: '10'
                           - volume: 373
-                            year: '2018'
-                            month: '05'
+                            year: '2019'
+                            month: '11'
                           - ...
                         panelist_ids_by_month:
                           - ids: 296
-                            year: '2018'
-                            month: '03'
+                            year: '2019'
+                            month: 09
                           - ids: 233
-                            year: '2018'
-                            month: '04'
+                            year: '2019'
+                            month: '10'
                           - ids: 198
-                            year: '2018'
-                            month: '05'
+                            year: '2019'
+                            month: '11'
                           - ...
                         total_months_seen: 12
                     params:
@@ -156,6 +156,10 @@ paths:
                       limit: 10
                       type: broad
                       sort: total
+                    stats:
+                      possible_results: 19264
+                      results: 100
+                      elapsed: 0.0571s
           description: 'Monthly search volume for one or more specific seed terms for an engine and a country_code e.g. Google US. Also includes panelists per month, total volume, average volume for last 12 months, total months seen and the query parameters.'
         '401':
           $ref: '#/components/responses/AccessForbidden'
@@ -190,25 +194,25 @@ paths:
                         avg_volume_for_last_12_months: 115143
                         volume_by_month:
                           - volume: 133346
-                            year: '2018'
-                            month: '03'
+                            year: '2019'
+                            month: 09
                           - volume: 124478
-                            year: '2018'
-                            month: '04'
+                            year: '2019'
+                            month: '10'
                           - volume: 121125
-                            year: '2018'
-                            month: '05'
+                            year: '2019'
+                            month: '11'
                           - ...
                         panelist_ids_by_month:
                           - ids: 49189
-                            year: '2018'
-                            month: '03'
+                            year: '2019'
+                            month: 09
                           - ids: 42654
-                            year: '2018'
-                            month: '04'
+                            year: '2019'
+                            month: '10'
                           - ids: 38276
-                            year: '2018'
-                            month: '05'
+                            year: '2019'
+                            month: '11'
                           - ...
                         total_months_seen: 12
                       - keyword: gmail
@@ -216,25 +220,25 @@ paths:
                         avg_volume_for_last_12_months: 77813
                         volume_by_month:
                           - volume: 89668
-                            year: '2018'
-                            month: '03'
+                            year: '2019'
+                            month: 09
                           - volume: 85709
-                            year: '2018'
-                            month: '04'
+                            year: '2019'
+                            month: '10'
                           - volume: 84670
-                            year: '2018'
-                            month: '05'
+                            year: '2019'
+                            month: '11'
                           - ...
                         panelist_ids_by_month:
                           - ids: 29843
-                            year: '2018'
-                            month: '03'
+                            year: '2019'
+                            month: 09
                           - ids: 25751
-                            year: '2018'
-                            month: '04'
+                            year: '2019'
+                            month: '10'
                           - ids: 23864
-                            year: '2018'
-                            month: '05'
+                            year: '2019'
+                            month: '11'
                           - ...
                         total_months_seen: 12
                     params:
@@ -242,6 +246,10 @@ paths:
                       country_code: us
                       limit: 10
                       sort: total
+                    stats:
+                      possible_results: 19264
+                      results: 100
+                      elapsed: 0.0571s
           description: 'Top keywords for an engine and a country_code e.g. Google US for each month. Also includes panelists per month, total volume, average volume for last 12 months, total months seen and the query parameters.'
         '401':
           $ref: '#/components/responses/AccessForbidden'
@@ -294,18 +302,18 @@ paths:
               examples:
                 result:
                   value:
-                    - 201803
-                    - 201804
-                    - 201805
-                    - 201806
-                    - 201807
-                    - 201808
-                    - 201809
-                    - 201810
-                    - 201811
-                    - 201812
-                    - 201901
                     - 201902
+                    - 201903
+                    - 201904
+                    - 201905
+                    - 201906
+                    - 201907
+                    - 201908
+                    - 201909
+                    - 201910
+                    - 201911
+                    - 201912
+                    - 202001
           description: 'All the available time periods for the keyword data, usually the last 12 months.'
         '401':
           $ref: '#/components/responses/AccessForbidden'
@@ -379,25 +387,25 @@ paths:
                         avg_volume_for_last_12_months: 82
                         volume_by_month:
                           - volume: 93
-                            year: '2018'
-                            month: '03'
+                            year: '2019'
+                            month: 09
                           - volume: 89
-                            year: '2018'
-                            month: '04'
+                            year: '2019'
+                            month: '10'
                           - volume: 113
-                            year: '2018'
-                            month: '05'
+                            year: '2019'
+                            month: '11'
                           - ...
                         panelist_ids_by_month:
                           - ids: 59
-                            year: '2018'
-                            month: '03'
+                            year: '2019'
+                            month: 09
                           - ids: 49
-                            year: '2018'
-                            month: '04'
+                            year: '2019'
+                            month: '10'
                           - ids: 58
-                            year: '2018'
-                            month: '05'
+                            year: '2019'
+                            month: '11'
                           - ...
                         total_months_seen: 12
                     params:
@@ -406,6 +414,10 @@ paths:
                       seeds: hello world
                       type: exact
                       sort: total
+                    stats:
+                      possible_results: 10
+                      results: 10
+                      elapsed: 0.0571s
           description: |-
             Monthly search volume for one or more specific seed terms for an engine and a country_code
              e.g. Google US. Also includes panelists per month, total volume, average volume for
@@ -486,29 +498,45 @@ components:
         enum:
           - GL
           - US
-          - CA
-          - GB
-          - AU
-          - NZ
+          - AD
           - AE
+          - AF
+          - AG
+          - AL
           - AM
+          - AO
           - AR
           - AT
+          - AU
+          - AW
           - AZ
+          - BA
+          - BB
           - BD
           - BE
           - BG
+          - BH
+          - BJ
+          - BN
           - BO
           - BR
+          - BS
+          - BW
           - BY
+          - BZ
           - CA
+          - CD
           - CH
           - CI
           - CL
           - CM
           - CN
           - CO
+          - CR
           - CU
+          - CV
+          - CW
+          - CY
           - CZ
           - DE
           - DK
@@ -520,14 +548,25 @@ components:
           - ES
           - ET
           - FI
+          - FJ
+          - FO
           - FR
+          - GA
+          - GB
+          - GD
           - GE
+          - GF
           - GH
+          - GI
+          - GP
           - GR
           - GT
+          - GU
+          - GY
           - HK
           - HN
           - HR
+          - HT
           - HU
           - ID
           - IE
@@ -535,60 +574,96 @@ components:
           - IN
           - IQ
           - IR
+          - IS
           - IT
+          - JM
           - JO
           - JP
           - KE
           - KG
           - KH
+          - KN
           - KR
           - KW
+          - KY
           - KZ
+          - LA
           - LB
+          - LC
           - LK
           - LT
+          - LU
           - LV
           - LY
           - MA
+          - MC
           - MD
+          - ME
           - MG
+          - MK
           - MM
           - MN
+          - MQ
+          - MT
+          - MU
+          - MV
           - MX
           - MY
+          - MZ
+          - NA
+          - NC
           - NG
+          - NI
           - NL
           - 'NO'
           - NP
+          - NZ
           - OM
+          - PA
           - PE
+          - PF
           - PH
           - PK
           - PL
+          - PR
           - PS
           - PT
+          - PY
+          - QA
+          - RE
           - RO
           - RS
           - RU
+          - RW
           - SA
           - SE
           - SG
+          - SI
           - SK
           - SN
+          - SR
           - SV
-          - SY
+          - TG
           - TH
+          - TJ
           - TN
           - TR
+          - TT
           - TW
           - TZ
           - UA
           - UG
           - UY
           - UZ
+          - VC
           - VE
+          - VI
           - VN
+          - XK
+          - YE
+          - YT
           - ZA
+          - ZM
           - ZW
       in: query
       required: true
