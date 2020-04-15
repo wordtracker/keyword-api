@@ -76,12 +76,13 @@ info:
     \ tag & also in the external anchor text of at least one backlink.\n14. **broad_domains_in_anchor_and_in_title**:\
     \ Number of root domains (not URLs) that contain all the words in any order within\
     \ the external anchor text of at least one backlink and the title tag.\n\n## Releases\
-    \  \n- **2.0.5**: 13.04.20: Add second clickstream source, now 168 countries incl.\
-    \ GL (global) for ALL countries.\n- **2.0.4**: 03.07.19: Add `start` paramater\
-    \ to /search and /top calls to allow pagination.\n- **2.0.3**: 06.05.19: Add 106\
-    \ countries, change country parameter to country_code, use ISO-3166-2 standard.\n\
-    - **2.0.2**: 30.04.19: Add /stats/keyword and /stats/link calls.\n- **2.0.1**:\
-    \ 23.04.19: Add Majestic link metrics.\n- **2.0.0**: 09.04.19: First release.\n"
+    \  \n- **2.0.5**: 13.04.20: Add second clickstream source, expand to 168 countries\
+    \ including GL (global) which aggregates search volumes for ALL countries.\n-\
+    \ **2.0.4**: 03.07.19: Add `start` parameter to /search and /top calls to allow\
+    \ pagination.\n- **2.0.3**: 06.05.19: Add 106 countries, change country parameter\
+    \ to country_code, use ISO-3166-2 standard.\n- **2.0.2**: 30.04.19: Add /stats/keyword\
+    \ and /stats/link calls.\n- **2.0.1**: 23.04.19: Add Majestic link metrics.\n\
+    - **2.0.0**: 09.04.19: First release of Wordtracker Keyword API 2.0.\n"
   termsOfService: https://www.wordtracker.com/terms
   contact:
     name: Wordtracker API Team
