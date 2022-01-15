@@ -4,7 +4,7 @@
   "dependencies": {
     "basic-auth": "^2.0.1",
     "gh-pages": "^2.0.1",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.5",
     "stringify-object": "^3.3.0",
     "swagger-repo": "^2.0.0-rc.15",
     "swagger-snippet": "^0.6.0"
