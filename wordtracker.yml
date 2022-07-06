@@ -1,829 +1,703 @@
----
 openapi: 3.0.2
 info:
-  title: Wordtracker Keyword API
-  version: 2.0.5
-  description: "*First release: 09.04.19, last API release: 12.04.20, last API docs\
-    \ release: 13.04.20*\n## Introduction\n\n### Raw Google, YouTube, Amazon, eBay\
-    \ keyword search data\nThe `Wordtracker Keyword API 2.0` provides keywords and\
-    \ associated search volumes for a range of sources, including Google (168 countries),\
-    \ YouTube, Amazon and eBay (106 countries). This data comes from multiple clickstream\
-    \ data sources including a ~18 million global anonymized panel aka the [clickstream](https://www.wordtracker.com/blog/keyword-research/what-is-clickstream-data),\
-    \ which makes it a very reliable, clean source of keywords (upwards of 2.06 billion\
-    \ unique keywords from 5.5 billion searches). To use the API you will first need\
-    \ to [sign up here](https://wordtracker.3scale.net). For pricing and more general\
-    \ information, please take a [look here](https://www.wordtracker.com/api). \n\n\
-    Please note that this is v2.0.5 of the Wordtracker Keyword API and currently includes\
-    \ keywords and search volumes from:\n- Google\n- YouTube\n- Amazon\n- eBay\n \n\
-    We have search volumes for over 168 countries including (but not limited to):\n\
-    - Global (GL) (all countries merged together)\n- United States (US), Canada (CA),\
-    \ United Kingdom (GB), \n- Australia (AU), New Zealand (NZ), Brazil (BR), Germany\
-    \ (DE), \n- Spain (ES), France (FR), India (IN), Italy (IT), Mexico (MX),\n- Netherlands\
-    \ (NL), Turkey (TR), South Africa (ZA)\n\nFor the full list please see this spreadsheet\
-    \ [Wordtracker keyword API 2.0 | Countries](https://docs.google.com/spreadsheets/d/1GCMXn_l4K5QYg8ijj9Asb9iPtvaep1TmAL2MKwhQIIw/edit#gid=0)\n\
-    \n## Get going in 10 minutes!\nFirst [register for an API account](https://wordtracker.3scale.net)\
-    \ (30 day free trial available). You can then find the production ready Wordtracker\
-    \ Keyword API 2.0 server at: https://api.lc.wordtracker.com\n\nPlease make sure\
-    \ you add the `app_id` and `app_key` as authorisation.\nHere's an example [REST\
-    \ url](https://api.lc.wordtracker.com/v2/search?engine=google&country=us&seeds=dog&limit=10&type=broad&app_id=your_app_id&app_key=your_key)\
-    \ to query the /search method. \n\nPlease note: If the above url does not work,\
-    \ please check the version e.g. /v2, /v2.1 etc. You can also see the latest urls\
-    \ at https://api.lc.wordtracker.com.\n### Please choose from these options\n*\
-    \ [Register for an API account (30 day free trial available)](https://wordtracker.3scale.net)\n\
-    * [API pricing](http://www.wordtracker.com/api)\n* [Try the data out in the Wordtracker\
-    \ keyword tool](http://www.wordtracker.com)\n\n\n\n## Available metrics\n### Monthly\
-    \ keyword search volumes\nPlease note that we use a 12 month rolling window for\
-    \ monthly search volumes. This means that as a new month begins, the last 12 months\
-    \ of data is re-processed up until the close of the previous month. E.g. if today\
-    \ is Dec 1st 2020 then a new 12 month rolling window is created from Dec 2019\
-    \ - Nov 2020. That also means you will see search volumes and # panelists for\
-    \ each of those last 12 months as well as a total volume & average volume for\
-    \ all months. \n\n### Majestic SEO link counts\nWordtracker have partnered with\
-    \ [MajesticSEO](http://www.majestic.com) who have the planet's largest Link Index\
-    \ database. Our 'global Google' keyword list has been matched against Majestic's\
-    \ database to allow you to see how much competition there is online for a given\
-    \ keyword. Keywords with high search volumes and a low link footprint present\
-    \ good SEO opportunities. \nNote: These metrics cover both 'on page' (title tag)\
-    \ and 'off page' (incoming links).\n\nIf the 'majestic' parameter is set to True,\
-    \ the following additional [MajesticSEO](http://www.majestic.com) link count metrics\
-    \ are available:\n\n1. **exact_urls_in_title:** Number of URLs that contain the\
-    \ exact keyword phrase within the title tag. E.g. for the keyword 'dog training'\
-    \ this would match 'dog training' and 'i love dog training' but not 'training\
-    \ my dog'.    \n2. **exact_domains_in_title:** Number of unique root domains (not\
-    \ URLs) that contain the exact keyword phrase within the title tag.\n3. **exact_urls_in_url**:\
-    \ Number of URLs that contain the exact keyword phrase within the URL. E.g. for\
-    \ the keyword 'dog training', this would match http://www.domain.com/dog-training-is-cool.html\
-    \ or http://www.dog-training.com.\n4. **exact_domains_in_url**: Number of unique\
-    \ root domains (not URLs) that contain the exact keyword phrase in the url belonging\
-    \ to that root domain.\n5. **exact_urls_in_anchor**: Number of URLs that contain\
-    \ the exact keyword phrase within the external anchor text of at least one backlink.\n\
-    6. **exact_domains_in_anchor**: Number of root domains (not URLs) that contain\
-    \ the exact keyword phrase within the external anchor text of at least one backlink.\n\
-    7. **exact_urls_in_anchor_and_in_title**: Number of URLs that contain the exact\
-    \ keyword phrase within both within the title tag & also in the external anchor\
-    \ text of at least one backlink.\n8. **exact_domains_in_anchor_and_in_title**:\
-    \ Number of root domains (not URLs) that contain the exact keyword phrase within\
-    \ both the external anchor text of at least one backlink and within the title\
-    \ tag.\n9. **broad_urls_in_title**: Number of URLs that contain all the words\
-    \ in any order within the title tag. E.g. for the keyword 'dog training' this\
-    \ would match 'training my dog'.\n10. **broad_domains_in_title**: Number of unique\
-    \ root domains (not URLs) that contain all the words in any order within the title\
-    \ tag.\n11. **broad_urls_in_anchor**: Number of URLs that contain all the words\
-    \ in any order in the external anchor text of at least one backlink.\n12. **broad_domains_in_anchor**:\
-    \ Number of root domains (not URLs) that contain all the words in any order within\
-    \ the external anchor text of at least one backlink.\n13. **broad_urls_in_anchor_and_in_title**:\
-    \ Number of URLs that contain all the words in any order, both within the title\
-    \ tag & also in the external anchor text of at least one backlink.\n14. **broad_domains_in_anchor_and_in_title**:\
-    \ Number of root domains (not URLs) that contain all the words in any order within\
-    \ the external anchor text of at least one backlink and the title tag.\n\n## Releases\
-    \  \n- **2.0.5**: 13.04.20: Add second clickstream source, expand to 168 countries\
-    \ including GL (global) which aggregates search volumes for ALL countries.\n-\
-    \ **2.0.4**: 03.07.19: Add `start` parameter to /search and /top calls to allow\
-    \ pagination.\n- **2.0.3**: 06.05.19: Add 106 countries, change country parameter\
-    \ to country_code, use ISO-3166-2 standard.\n- **2.0.2**: 30.04.19: Add /stats/keyword\
-    \ and /stats/link calls.\n- **2.0.1**: 23.04.19: Add Majestic link metrics.\n\
-    - **2.0.0**: 09.04.19: First release of Wordtracker Keyword API 2.0.\n"
-  termsOfService: https://www.wordtracker.com/terms
-  contact:
-    name: Wordtracker API Team
-    url: http://www.wordtracker.com
-    email: devops@wordtracker.com
-  license:
-    name: Apache 2.0
-    url: https://www.apache.org/licenses/LICENSE-2.0.html
-  x-date: 2019-03-07
-  x-logo:
-    url: https://s3.amazonaws.com/wordtracker-front-end-assets/images/wordtracker-logo-transparent.png
-    backgroundColor: '#5195E9'
+    title: Wordtracker Keyword API
+    version: '3.0'
+    description: >
+        *First release: 06.06.22, last API release: 06.06.22, last API docs release: 06.06.22*
+
+        ## Introduction
+
+
+        ### Google keywords with raw clickstream for more accurate search volumes
+
+        The `Wordtracker Keyword API 3.0` provides keywords and associated search volumes for Google. This
+        data comes from Google and the
+        [clickstream](https://www.wordtracker.com/blog/keyword-research/what-is-clickstream-data), which makes
+        it a very reliable, clean source of keywords (upwards of 2.06 billion unique keywords from 5.5 billion
+        searches). To use the API you will first need to [sign up here](https://wordtracker.3scale.net). For
+        pricing and more general information, please take a [look here](https://www.wordtracker.com/api).
+
+        Please note that this is v3.0 of the Wordtracker Keyword API and currently includes keywords and
+        search volumes from:
+
+        - Google
+
+        We have search volumes for 240 countries. For the full list please see this spreadsheet [Wordtracker
+        keyword API |
+        Countries](https://docs.google.com/spreadsheets/d/1GCMXn_l4K5QYg8ijj9Asb9iPtvaep1TmAL2MKwhQIIw/edit#gid=267834601).
+
+
+        ## Get going in 10 minutes!
+
+        First [register for an API account](https://wordtracker.3scale.net) (30 day free trial available). You
+        can then find the production ready Wordtracker Keyword API 2.0 server at:
+        https://api.lc.wordtracker.com
+
+
+        Please make sure you add the `app_id` and `app_key` as authorisation.
+
+        Here's an example [REST
+        url](https://api.lc.wordtracker.com/v3/search?engine=google&country=us&seeds=dog&limit=10&type=broad&app_id=your_app_id&app_key=your_key)
+        to query the /search method.
+
+
+        Please note: If the above url does not work, please check the version e.g. /v3. You can also see the
+        latest calls at https://api.lc.wordtracker.com.
+
+        ### Please choose from these options
+
+        * [Register for an API account (30 day free trial available)](https://wordtracker.3scale.net)
+
+        * [API pricing](http://www.wordtracker.com/api)
+
+        * [Try the data out in the Wordtracker keyword tool](http://www.wordtracker.com)
+
+
+
+
+        ## Available metrics
+
+        ### Majestic SEO link counts
+
+        Wordtracker have partnered with [MajesticSEO](http://www.majestic.com) who have the planet's largest
+        Link Index database. Our 'global Google' keyword list has been matched against Majestic's database to
+        allow you to see how much competition there is online for a given keyword. Keywords with high search
+        volumes and a low link footprint present good SEO opportunities.
+
+        Note: These metrics cover both 'on page' (title tag) and 'off page' (incoming links).
+
+
+        If the 'majestic' parameter is set to True, the following additional
+        [MajesticSEO](http://www.majestic.com) link count metrics are available:
+
+
+        1. **exact_urls_in_title:** Number of URLs that contain the exact keyword phrase within the title tag.
+        E.g. for the keyword 'dog training' this would match 'dog training' and 'i love dog training' but not
+        'training my dog'.
+
+        2. **exact_domains_in_title:** Number of unique root domains (not URLs) that contain the exact keyword
+        phrase within the title tag.
+
+        3. **exact_urls_in_url**: Number of URLs that contain the exact keyword phrase within the URL. E.g.
+        for the keyword 'dog training', this would match http://www.domain.com/dog-training-is-cool.html or
+        http://www.dog-training.com.
+
+        4. **exact_domains_in_url**: Number of unique root domains (not URLs) that contain the exact keyword
+        phrase in the url belonging to that root domain.
+
+        5. **exact_urls_in_anchor**: Number of URLs that contain the exact keyword phrase within the external
+        anchor text of at least one backlink.
+
+        6. **exact_domains_in_anchor**: Number of root domains (not URLs) that contain the exact keyword
+        phrase within the external anchor text of at least one backlink.
+
+        7. **exact_urls_in_anchor_and_in_title**: Number of URLs that contain the exact keyword phrase within
+        both within the title tag & also in the external anchor text of at least one backlink.
+
+        8. **exact_domains_in_anchor_and_in_title**: Number of root domains (not URLs) that contain the exact
+        keyword phrase within both the external anchor text of at least one backlink and within the title tag.
+
+        9. **broad_urls_in_title**: Number of URLs that contain all the words in any order within the title
+        tag. E.g. for the keyword 'dog training' this would match 'training my dog'.
+
+        10. **broad_domains_in_title**: Number of unique root domains (not URLs) that contain all the words in
+        any order within the title tag.
+
+        11. **broad_urls_in_anchor**: Number of URLs that contain all the words in any order in the external
+        anchor text of at least one backlink.
+
+        12. **broad_domains_in_anchor**: Number of root domains (not URLs) that contain all the words in any
+        order within the external anchor text of at least one backlink.
+
+        13. **broad_urls_in_anchor_and_in_title**: Number of URLs that contain all the words in any order,
+        both within the title tag & also in the external anchor text of at least one backlink.
+
+        14. **broad_domains_in_anchor_and_in_title**: Number of root domains (not URLs) that contain all the
+        words in any order within the external anchor text of at least one backlink and the title tag.
+
+
+        ## Releases
+
+        - **3.0.0**: 06.07.22: First release of Wordtracker Keyword API 3.0.
+    termsOfService: 'https://www.wordtracker.com/terms'
+    contact:
+        name: Wordtracker API Team
+        url: 'http://www.wordtracker.com'
+        email: devops@wordtracker.com
+    license:
+        name: Apache 2.0
+        url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+    x-date: '2022-06-07'
+    x-logo:
+        url: 'https://s3.amazonaws.com/wordtracker-front-end-assets/images/wordtracker-logo-transparent.png'
+        backgroundColor: '#5195E9'
 servers:
-- url: https://api.lc.wordtracker.com/v1
-  description: Production server
+    -
+        url: 'https://api.lc.wordtracker.com/v3'
+        description: Production server
 paths:
-  /search:
-    get:
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                firefox:
-                  value:
-                    results:
-                    - keyword: firefox
-                      total_volume_for_last_12_months: 25258
-                      avg_volume_for_last_12_months: 2105
-                      volume_by_month:
-                      - volume: 2336
-                        year: "2019"
-                        month: "09"
-                      - volume: 2486
-                        year: "2019"
-                        month: "10"
-                      - volume: 2410
-                        year: "2019"
-                        month: "11"
-                      - '...'
-                      panelist_ids_by_month:
-                      - ids: 1440
-                        year: "2019"
-                        month: "09"
-                      - ids: 1384
-                        year: "2019"
-                        month: "10"
-                      - ids: 1263
-                        year: "2019"
-                        month: "11"
-                      - '...'
-                      total_months_seen: 12
-                    - keyword: mozilla firefox
-                      total_volume_for_last_12_months: 4013
-                      avg_volume_for_last_12_months: 334
-                      volume_by_month:
-                      - volume: 476
-                        year: "2019"
-                        month: "09"
-                      - volume: 424
-                        year: "2019"
-                        month: "10"
-                      - volume: 373
-                        year: "2019"
-                        month: "11"
-                      - '...'
-                      panelist_ids_by_month:
-                      - ids: 296
-                        year: "2019"
-                        month: "09"
-                      - ids: 233
-                        year: "2019"
-                        month: "10"
-                      - ids: 198
-                        year: "2019"
-                        month: "11"
-                      - '...'
-                      total_months_seen: 12
-                    params:
-                      engine: google
-                      country_code: us
-                      seeds:
-                      - firefox
-                      limit: 10
-                      type: broad
-                      sort: total
-                    stats:
-                      possible_results: 19264
-                      results: 100
-                      elapsed: 0.0571s
-          description: Monthly search volume for one or more specific seed terms for
-            an engine and a country_code e.g. Google US. Also includes panelists per
-            month, total volume, average volume for last 12 months, total months seen
-            and the query parameters.
-        "401":
-          $ref: '#/components/responses/AccessForbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      operationId: search
-      summary: /search (raw keyword suggestions for engine/country_code)
-      description: |
-        Search the Wordtracker Keyword API for raw keyword suggestions and monthly volumes using one or more seed terms.
-    parameters:
-    - $ref: '#/components/parameters/seeds'
-    - $ref: '#/components/parameters/engine'
-    - $ref: '#/components/parameters/country_code'
-    - $ref: '#/components/parameters/type'
-    - $ref: '#/components/parameters/sort'
-    - $ref: '#/components/parameters/start'
-    - $ref: '#/components/parameters/limit'
-    - $ref: '#/components/parameters/scale'
-    - $ref: '#/components/parameters/majestic'
-  /top:
-    get:
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                firefox:
-                  value:
-                    results:
-                    - keyword: youtube
-                      total_volume_for_last_12_months: 1381715
-                      avg_volume_for_last_12_months: 115143
-                      volume_by_month:
-                      - volume: 133346
-                        year: "2019"
-                        month: "09"
-                      - volume: 124478
-                        year: "2019"
-                        month: "10"
-                      - volume: 121125
-                        year: "2019"
-                        month: "11"
-                      - '...'
-                      panelist_ids_by_month:
-                      - ids: 49189
-                        year: "2019"
-                        month: "09"
-                      - ids: 42654
-                        year: "2019"
-                        month: "10"
-                      - ids: 38276
-                        year: "2019"
-                        month: "11"
-                      - '...'
-                      total_months_seen: 12
-                    - keyword: gmail
-                      total_volume_for_last_12_months: 933757
-                      avg_volume_for_last_12_months: 77813
-                      volume_by_month:
-                      - volume: 89668
-                        year: "2019"
-                        month: "09"
-                      - volume: 85709
-                        year: "2019"
-                        month: "10"
-                      - volume: 84670
-                        year: "2019"
-                        month: "11"
-                      - '...'
-                      panelist_ids_by_month:
-                      - ids: 29843
-                        year: "2019"
-                        month: "09"
-                      - ids: 25751
-                        year: "2019"
-                        month: "10"
-                      - ids: 23864
-                        year: "2019"
-                        month: "11"
-                      - '...'
-                      total_months_seen: 12
-                    params:
-                      engine: google
-                      country_code: us
-                      limit: 10
-                      sort: total
-                    stats:
-                      possible_results: 19264
-                      results: 100
-                      elapsed: 0.0571s
-          description: Top keywords for an engine and a country_code e.g. Google US
-            for each month. Also includes panelists per month, total volume, average
-            volume for last 12 months, total months seen and the query parameters.
-        "401":
-          $ref: '#/components/responses/AccessForbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      operationId: top
-      summary: /top (keywords for an engine/country_code)
-      description: Fetches the top keywords (max 2000) for an engine and a country_code
-        e.g. Google US.
-    parameters:
-    - $ref: '#/components/parameters/engine'
-    - $ref: '#/components/parameters/country_code'
-    - $ref: '#/components/parameters/sort'
-    - $ref: '#/components/parameters/start'
-    - $ref: '#/components/parameters/limit'
-    - $ref: '#/components/parameters/scale'
-    - $ref: '#/components/parameters/majestic'
-  /count:
-    get:
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                firefox:
-                  value:
-                    count: 1237
-                    engine: google
-                    country_code: us
-                    seeds: hello world
-                    type: broad
-          description: Total number of keywords matching the parameters e.g. specific
-            engine and country_code.
-        "401":
-          $ref: '#/components/responses/AccessForbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      operationId: count
-      summary: /count (total keywords available for engine/country_code)
-      description: Counts the total number of keywords matching specific parameters.
-        The /search API is limited to a maximum of 2000 search results per query.
-        The /count method tells you how many keywords there are in total.
-    parameters:
-    - $ref: '#/components/parameters/seeds'
-    - $ref: '#/components/parameters/engine'
-    - $ref: '#/components/parameters/country_code'
-    - $ref: '#/components/parameters/type'
-  /periods:
-    get:
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                result:
-                  value:
-                  - 2019_02
-                  - 2019_03
-                  - 2019_04
-                  - 2019_05
-                  - 2019_06
-                  - 2019_07
-                  - 2019_08
-                  - 2019_09
-                  - 2019_10
-                  - 2019_11
-                  - 2019_12
-                  - 2020_01
-          description: All the available time periods for the keyword data, usually
-            the last 12 months.
-        "401":
-          $ref: '#/components/responses/AccessForbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      operationId: periods
-      summary: /periods (last 12 months as a list)
-      description: Get all the available time periods for the keyword data, usually
-        the last 12 months.
-  /stats/keyword:
-    get:
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                result:
-                  value:
-                    max: 5551205
-                    count: 265407303
-                    sum: 813533971
-                    avg: 3
-                    engine: google
-                    country_code: global
-                    volume: avg
-          description: All the statistics about the whole dataset e.g. total number
-            of keywords. Please note that these statistics will vary based on the
-            engine & country_code specified in the parameters.
-        "401":
-          $ref: '#/components/responses/AccessForbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      operationId: stats/keyword
-      summary: /stats/keyword (for each engine/country_code)
-      description: Returns statistics about the whole dataset for a specific engine
-        and country_code e.g. max, count, sum, avg.
-    parameters:
-    - $ref: '#/components/parameters/engine'
-    - $ref: '#/components/parameters/country_code'
-    - $ref: '#/components/parameters/volume'
-    - $ref: '#/components/parameters/scale'
-  /stats/link:
-    get:
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                result:
-                  value:
-                    iaat_max: 105312510962
-                    iaat_count: 100000000
-                    iaat_sum: 355318294412
-                    iaat_avg: 3553
-          description: Returns statistics about the Majestic link dataset e.g. IAAT
-            (in anchor and title).
-        "401":
-          $ref: '#/components/responses/AccessForbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      operationId: stats/link
-      summary: /stats/link (Majestic link counts)
-      description: Returns statistics about the whole Majestic dataset.
-  /fetch:
-    post:
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                firefox:
-                  value:
-                    results:
-                    - keyword: hello world
-                      total_volume_for_last_12_months: 984
-                      avg_volume_for_last_12_months: 82
-                      volume_by_month:
-                      - volume: 93
-                        year: "2019"
-                        month: "09"
-                      - volume: 89
-                        year: "2019"
-                        month: "10"
-                      - volume: 113
-                        year: "2019"
-                        month: "11"
-                      - '...'
-                      panelist_ids_by_month:
-                      - ids: 59
-                        year: "2019"
-                        month: "09"
-                      - ids: 49
-                        year: "2019"
-                        month: "10"
-                      - ids: 58
-                        year: "2019"
-                        month: "11"
-                      - '...'
-                      total_months_seen: 12
-                    params:
-                      engine: google
-                      country_code: us
-                      seeds: hello world
-                      type: exact
-                      sort: total
-                    stats:
-                      possible_results: 10
-                      results: 10
-                      elapsed: 0.0571s
-          description: |-
-            Monthly search volume for one or more specific seed terms for an engine and a country_code
-             e.g. Google US. Also includes panelists per month, total volume, average volume for
-             last 12 months, total months seen and the query parameters.
-        "401":
-          $ref: '#/components/responses/AccessForbidden'
-        "404":
-          $ref: '#/components/responses/NotFound'
-      operationId: fetch
-      summary: /fetch (exact search volume for multiple seed terms)
-      description: Whereas /search takes one or more seeds terms and returns up to
-        2000 keyword suggestions, /fetch is more specific. This method allows you
-        to enter up to 500 seeds and retrieve the search volume (and panelist volumes)
-        for each of those seeds specifically.
-    parameters:
-    - $ref: '#/components/parameters/seeds'
-    - $ref: '#/components/parameters/engine'
-    - $ref: '#/components/parameters/country_code'
-    - $ref: '#/components/parameters/sort'
-    - $ref: '#/components/parameters/scale'
-    - $ref: '#/components/parameters/majestic'
+    /search:
+        get:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            examples:
+                                firefox:
+                                    value:
+                                        results:
+                                            -
+                                                keyword: firefox
+                                                total_volume: 25258
+                                                avg_volume: 2105
+                                                volume_by_month:
+                                                    -
+                                                        volume: 2336
+                                                        year: '2019'
+                                                        month: 09
+                                                    -
+                                                        volume: 2486
+                                                        year: '2019'
+                                                        month: '10'
+                                                    -
+                                                        volume: 2410
+                                                        year: '2019'
+                                                        month: '11'
+                                                    - ...
+                                                total_months_seen: 12
+                                            -
+                                                keyword: mozilla firefox
+                                                total_volume: 4013
+                                                avg_volume: 334
+                                                volume_by_month:
+                                                    -
+                                                        volume: 476
+                                                        year: '2019'
+                                                        month: 09
+                                                    -
+                                                        volume: 424
+                                                        year: '2019'
+                                                        month: '10'
+                                                    -
+                                                        volume: 373
+                                                        year: '2019'
+                                                        month: '11'
+                                                    - ...
+                                                total_months_seen: 12
+                                        params:
+                                            engine: google
+                                            country_code: us
+                                            seeds:
+                                                - firefox
+                                            limit: 10
+                                            type: broad
+                                            sort: total
+                                        stats:
+                                            possible_results: 19264
+                                            results: 100
+                                            elapsed: 0.0571s
+                    description: >-
+                        Monthly search volume for one or more specific seed terms for a search engine with a
+                        country_code e.g. Google US. Also includes total volume, average volume for last 12
+                        months, total months seen and the query parameters. Takes up to 200 seeds and returns
+                        up to 800 keyword ideas.
+                '401':
+                    $ref: '#/components/responses/AccessForbidden'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+            operationId: search
+            summary: /search
+            description: >
+                Search the Wordtracker Keyword API for Google keyword suggestions and monthly volumes using
+                one or more seed terms. Note: We use the clickstream data to break apart keywords with the
+                same search volumes to find a more accurate traffic estimate.
+        parameters:
+            -
+                $ref: '#/components/parameters/seeds'
+            -
+                $ref: '#/components/parameters/engine'
+            -
+                $ref: '#/components/parameters/country_code'
+            -
+                $ref: '#/components/parameters/type'
+            -
+                $ref: '#/components/parameters/sort'
+            -
+                $ref: '#/components/parameters/start'
+            -
+                $ref: '#/components/parameters/limit'
+            -
+                $ref: '#/components/parameters/majestic'
+    /fetch:
+        post:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            examples:
+                                firefox:
+                                    value:
+                                        results:
+                                            -
+                                                keyword: hello world
+                                                total_volume: 984
+                                                avg_volume: 82
+                                                volume_by_month:
+                                                    -
+                                                        volume: 93
+                                                        year: '2019'
+                                                        month: 09
+                                                    -
+                                                        volume: 89
+                                                        year: '2019'
+                                                        month: '10'
+                                                    -
+                                                        volume: 113
+                                                        year: '2019'
+                                                        month: '11'
+                                                    - ...
+                                                total_months_seen: 12
+                                        params:
+                                            engine: google
+                                            country_code: us
+                                            seeds: hello world
+                                            type: exact
+                                            sort: total
+                                        stats:
+                                            possible_results: 10
+                                            results: 10
+                                            elapsed: 0.0571s
+                    description: >-
+                        Monthly search volume for one or more specific seed terms for an engine and a
+                        country_code
+                         e.g. Google US. Also includes total volume, average volume for
+                         last 12 months, total months seen and the query parameters.
+                '401':
+                    $ref: '#/components/responses/AccessForbidden'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+            operationId: fetch
+            summary: /fetch
+            description: >-
+                Whereas /search takes up to 200 seeds and returns up to 800 keyword suggestions, /fetch is
+                more specific. This method allows you to enter up to 700 seeds and retrieve the search volume
+                (and panelist volumes) for each of those seeds specifically. Note: We use the clickstream data
+                to break apart keywords with the same search volumes to find a more accurate traffic
+                estimate.
+        parameters:
+            -
+                $ref: '#/components/parameters/seeds'
+            -
+                $ref: '#/components/parameters/engine'
+            -
+                $ref: '#/components/parameters/country_code'
+            -
+                $ref: '#/components/parameters/sort'
+            -
+                $ref: '#/components/parameters/majestic'
 components:
-  schemas:
-    Error:
-      type: object
-      properties:
-        status:
-          description: The HTTP status code.
-          maximum: 600
-          minimum: 100
-          type: integer
-        error:
-          type: string
+    schemas:
+        Error:
+            type: object
+            properties:
+                status:
+                    description: The HTTP status code.
+                    maximum: 600
+                    minimum: 100
+                    type: integer
+                error:
+                    type: string
+                type:
+                    description: >-
+                        A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that identifies the
+                        problem type. It should provide human-readable documentation for the problem type.
+                        When this member is not present, its value is assumed to be "about:blank".
+                    type: string
+                title:
+                    description: >-
+                        A short, human-readable summary of the problem type. It SHOULD NOT change from
+                        occurrence to occurrence of the problem, except for purposes of localization.
+                    type: string
+    responses:
+        AccessForbidden:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+            description: 'Access forbidden, invalid API key was used'
+        NotFound:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+            description: Resource was not found
+    parameters:
+        seeds:
+            name: seeds
+            description: >-
+                One or more strings. If entering a single seed then simply specify seeds=dog and if multiple
+                then please use a list format e.g. seeds='dog','dog training'.
+
+                Think of `seeds` as one or more of your starter ideas to get going with e.g. 'chocolate' or
+                'dog training'. This is a separate concept from keywords which are returned in the results and
+                which show exactly what people are typing into the search boxes of the engines like Google.
+                With some analysis some of these results will become your key words aka `keywords`.
+            schema:
+                type: array
+                items: {}
+            in: query
+            required: true
+        engine:
+            name: engine
+            description: 'The engine that you want keyword suggestions and monthly volumes for. Default: `google`.'
+            schema:
+                enum:
+                    - google
+            in: query
+            required: true
+        country_code:
+            name: country_code
+            description: >-
+                Specifies the territory to search within. Please use a two letter ISO 3166-2 country code.
+                e.g. `US` is United States and `GB` is Great Britain (United Kingdom). Default: `US`.
+            schema:
+                enum:
+                    - AD
+                    - AE
+                    - AF
+                    - AG
+                    - AI
+                    - AL
+                    - AM
+                    - AO
+                    - AQ
+                    - AR
+                    - AS
+                    - AT
+                    - AU
+                    - AW
+                    - AZ
+                    - BA
+                    - BB
+                    - BD
+                    - BE
+                    - BF
+                    - BG
+                    - BH
+                    - BI
+                    - BJ
+                    - BM
+                    - BN
+                    - BO
+                    - BQ
+                    - BR
+                    - BS
+                    - BT
+                    - BV
+                    - BW
+                    - BY
+                    - BZ
+                    - CA
+                    - CC
+                    - CD
+                    - CF
+                    - CG
+                    - CH
+                    - CI
+                    - CK
+                    - CL
+                    - CM
+                    - CN
+                    - CO
+                    - CR
+                    - CV
+                    - CW
+                    - CX
+                    - CY
+                    - CZ
+                    - DE
+                    - DJ
+                    - DK
+                    - DM
+                    - DO
+                    - DZ
+                    - EC
+                    - EE
+                    - EG
+                    - EH
+                    - ER
+                    - ES
+                    - ET
+                    - FI
+                    - FJ
+                    - FK
+                    - FM
+                    - FO
+                    - FR
+                    - GA
+                    - GB
+                    - GD
+                    - GE
+                    - GF
+                    - GG
+                    - GH
+                    - GI
+                    - GL
+                    - GM
+                    - GN
+                    - GP
+                    - GQ
+                    - GR
+                    - GS
+                    - GT
+                    - GU
+                    - GW
+                    - GY
+                    - HK
+                    - HM
+                    - HN
+                    - HR
+                    - HT
+                    - HU
+                    - ID
+                    - IE
+                    - IL
+                    - IN
+                    - IO
+                    - IQ
+                    - IS
+                    - IT
+                    - JE
+                    - JM
+                    - JO
+                    - JP
+                    - KE
+                    - KG
+                    - KH
+                    - KI
+                    - KM
+                    - KN
+                    - KR
+                    - KW
+                    - KY
+                    - KZ
+                    - LA
+                    - LB
+                    - LC
+                    - LI
+                    - LK
+                    - LR
+                    - LS
+                    - LT
+                    - LU
+                    - LV
+                    - LY
+                    - MA
+                    - MC
+                    - MD
+                    - ME
+                    - MG
+                    - MH
+                    - MK
+                    - ML
+                    - MM
+                    - MN
+                    - MO
+                    - MP
+                    - MQ
+                    - MR
+                    - MS
+                    - MT
+                    - MU
+                    - MV
+                    - MW
+                    - MX
+                    - MY
+                    - MZ
+                    - NA
+                    - NC
+                    - NE
+                    - NF
+                    - NG
+                    - NI
+                    - NL
+                    - 'NO'
+                    - NP
+                    - NR
+                    - NU
+                    - NZ
+                    - OM
+                    - PA
+                    - PE
+                    - PF
+                    - PG
+                    - PH
+                    - PK
+                    - PL
+                    - PM
+                    - PN
+                    - PR
+                    - PS
+                    - PT
+                    - PW
+                    - PY
+                    - QA
+                    - RE
+                    - RO
+                    - RS
+                    - RU
+                    - RW
+                    - SA
+                    - SB
+                    - SC
+                    - SE
+                    - SG
+                    - SH
+                    - SI
+                    - SJ
+                    - SK
+                    - SL
+                    - SM
+                    - SN
+                    - SO
+                    - SR
+                    - ST
+                    - SV
+                    - SX
+                    - SZ
+                    - TC
+                    - TD
+                    - TF
+                    - TG
+                    - TH
+                    - TJ
+                    - TK
+                    - TL
+                    - TM
+                    - TN
+                    - TO
+                    - TR
+                    - TT
+                    - TV
+                    - TW
+                    - TZ
+                    - UA
+                    - UG
+                    - UM
+                    - US
+                    - UY
+                    - UZ
+                    - VA
+                    - VC
+                    - VE
+                    - VG
+                    - VI
+                    - VN
+                    - VU
+                    - WF
+                    - WS
+                    - XK
+                    - YE
+                    - YT
+                    - ZA
+                    - ZM
+                    - ZW
+            in: query
+            required: true
         type:
-          description: A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)]
-            that identifies the problem type. It should provide human-readable documentation
-            for the problem type. When this member is not present, its value is assumed
-            to be "about:blank".
-          type: string
-        title:
-          description: A short, human-readable summary of the problem type. It SHOULD
-            NOT change from occurrence to occurrence of the problem, except for purposes
-            of localization.
-          type: string
-  responses:
-    AccessForbidden:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Access forbidden, invalid API key was used
-    NotFound:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Resource was not found
-  parameters:
-    seeds:
-      name: seeds
-      description: |-
-        One or more strings (max 100). If entering a single seed then simply specify seeds=dog and if multiple then please use a list format e.g. seeds='dog','dog training'.
-        Think of `seeds` as one or more of your starter ideas to get going with e.g. 'chocolate' or 'dog training'. This is a separate concept from keywords which are returned in the results and which show exactly what people are typing into the search boxes of the engines like Google. With some analysis some of these results will become your key words aka `keywords`.
-      schema:
-        type: array
-        items: {}
-      in: query
-      required: true
-    engine:
-      name: engine
-      description: 'The engine that you want keyword suggestions and monthly volumes
-        for. Default: `google`.'
-      schema:
-        enum:
-        - google
-        - youtube
-        - amazon
-        - ebay
-      in: query
-      required: true
-    country_code:
-      name: country_code
-      description: "Specifies the territory to search within. Two letter ISO 3166-2\
-        \ country code or `GL` for global. \nGlobal means all ALL countries combined\
-        \ together. `US` is United States and `GB` is Great Britain (United Kingdom).\
-        \ Default: `GL`."
-      schema:
-        enum:
-        - GL
-        - US
-        - AD
-        - AE
-        - AF
-        - AG
-        - AL
-        - AM
-        - AO
-        - AR
-        - AT
-        - AU
-        - AW
-        - AZ
-        - BA
-        - BB
-        - BD
-        - BE
-        - BG
-        - BH
-        - BJ
-        - BN
-        - BO
-        - BR
-        - BS
-        - BW
-        - BY
-        - BZ
-        - CA
-        - CD
-        - CH
-        - CI
-        - CL
-        - CM
-        - CN
-        - CO
-        - CR
-        - CU
-        - CV
-        - CW
-        - CY
-        - CZ
-        - DE
-        - DK
-        - DO
-        - DZ
-        - EC
-        - EE
-        - EG
-        - ES
-        - ET
-        - FI
-        - FJ
-        - FO
-        - FR
-        - GA
-        - GB
-        - GD
-        - GE
-        - GF
-        - GH
-        - GI
-        - GP
-        - GR
-        - GT
-        - GU
-        - GY
-        - HK
-        - HN
-        - HR
-        - HT
-        - HU
-        - ID
-        - IE
-        - IL
-        - IN
-        - IQ
-        - IR
-        - IS
-        - IT
-        - JM
-        - JO
-        - JP
-        - KE
-        - KG
-        - KH
-        - KN
-        - KR
-        - KW
-        - KY
-        - KZ
-        - LA
-        - LB
-        - LC
-        - LK
-        - LT
-        - LU
-        - LV
-        - LY
-        - MA
-        - MC
-        - MD
-        - ME
-        - MG
-        - MK
-        - MM
-        - MN
-        - MQ
-        - MT
-        - MU
-        - MV
-        - MX
-        - MY
-        - MZ
-        - NA
-        - NC
-        - NG
-        - NI
-        - NL
-        - "NO"
-        - NP
-        - NZ
-        - OM
-        - PA
-        - PE
-        - PF
-        - PH
-        - PK
-        - PL
-        - PR
-        - PS
-        - PT
-        - PY
-        - QA
-        - RE
-        - RO
-        - RS
-        - RU
-        - RW
-        - SA
-        - SE
-        - SG
-        - SI
-        - SK
-        - SN
-        - SR
-        - SV
-        - TG
-        - TH
-        - TJ
-        - TN
-        - TR
-        - TT
-        - TW
-        - TZ
-        - UA
-        - UG
-        - UY
-        - UZ
-        - VC
-        - VE
-        - VI
-        - VN
-        - XK
-        - YE
-        - YT
-        - ZA
-        - ZM
-        - ZW
-      in: query
-      required: true
-    type:
-      name: type
-      description: |-
-        ### Broadest
-
-        Returns keyword suggestions for any seed words. E.g. a search for 'dog training' returns suggestions for 'dog' or 'training' returns:
-        * dog training
-        * training dog
-        * a dog is great
-        * training day
-
-        ---
-        ### Broad
-
-        Returns keyword suggestions for all words in any order. E.g. a search for 'dog training' returns:
-        * dog training
-        * training your dog
-
-        but not:
-
-        * every dog has it's day
+            name: type
+            description: >-
+                ### Broad
 
 
-        ---
-        ### Phrase
+                Returns keyword suggestions for all words in any order. E.g. a search for 'dog training'
+                returns:
 
-        Returns keyword suggestions for the exact phrase. E.g. a search for 'dog training' returns:
-        * dog training
-        * I love dog training
-        * dog training is fun
+                * dog training
+
+                * training your dog
 
 
-        ---
-        ### Wildcard
+                but not:
 
-        Allows you to use the * and ? characters to specify a wildcard. E.g. tr* returns:
-        * dog training
-        * training your dog
-      schema:
-        enum:
-        - broadest
-        - broad
-        - phrase
-        - wildcard
-      in: query
-      required: true
-    sort:
-      name: sort
-      description: |-
-        How you'd like to sort the results. Default `total`.
-        Total: Total searches for the last 12 months which means total search volume for Jan + Feb + Mar etc.
-        Avg: Average searches for the last 12 months which means the total search volume for all 12 months / 12.
-      schema:
-        enum:
-        - total
-        - avg
-      in: query
-      required: true
-    start:
-      name: start
-      description: |-
-        Which row would you like results to be returned from.
-        An integer between 1 (min) and 100,000 max results in the query.
-        Please make sure that `start` + `limit` <= 100000.
-      schema:
-        type: integer
-      in: query
-      required: true
-    limit:
-      name: limit
-      description: |-
-        The maximum number of results which will be returned from the query.
-        An integer between 1 and 2000 (max).
-      schema:
-        type: integer
-      in: query
-      required: true
-    scale:
-      name: scale
-      description: Scale the raw keyword sample volumes to match the engine's estimated
-        search volumes (Google, Amazon, YouTube and eBay).
-      schema:
-        type: boolean
-      in: query
-      required: true
-    majestic:
-      name: majestic
-      description: Add Majestic (www.majestic.com) link count metrics.
-      schema:
-        type: boolean
-      in: query
-      required: true
-    volume:
-      name: volume
-      description: Which volume to use for the last 12 months. I.e. the total for
-        the last 12 months or the average.
-      schema:
-        enum:
-        - total
-        - avg
-      in: query
-      required: true
-  securitySchemes:
-    app_key:
-      type: apiKey
-      description: The Wordtracker Keyword API requires the app_id and app_key parameters
-        in order to perform authorization. Authentication parameters must be present
-        in the query string only, regardless of request method. To obtain these please
-        sign up at https://wordtracker.3scale.net
-      name: app_key
-      in: header
-    app_id:
-      type: apiKey
-      description: The Wordtracker Keyword API requires the app_id and app_key parameters
-        in order to perform authorization. Authentication parameters must be present
-        in the query string only, regardless of request method. To obtain these please
-        sign up at https://wordtracker.3scale.net
-      name: app_id
-      in: header
+
+                * every dog has it's day
+            schema:
+                enum:
+                    - broad
+            in: query
+            required: true
+        sort:
+            name: sort
+            description: >-
+                How you'd like to sort the results. Default `total`.
+
+                Total: Total searches for the last 12 months which means total search volume for Jan + Feb +
+                Mar etc.
+
+                Avg: Average searches for the last 12 months which means the total search volume for all 12
+                months / 12.
+            schema:
+                enum:
+                    - total
+                    - avg
+            in: query
+            required: true
+        start:
+            name: start
+            description: |-
+                Which row would you like results to be returned from.
+                An integer between 1 (min) and 2000 max results in the query.
+                Please make sure that `start` + `limit` <= 2000.
+            schema:
+                type: integer
+            in: query
+            required: true
+        limit:
+            name: limit
+            description: |-
+                The maximum number of results which will be returned from the query.
+                An integer between 1 and 2000 (max).
+            schema:
+                type: integer
+            in: query
+            required: true
+        majestic:
+            name: majestic
+            description: Add Majestic (www.majestic.com) link count metrics.
+            schema:
+                type: boolean
+            in: query
+            required: true
+        volume:
+            name: volume
+            description: >-
+                Which volume to use for the last 12 months. I.e. the `total` for the last 12 months or the
+                average (`avg`).
+            schema:
+                enum:
+                    - total
+                    - avg
+            in: query
+            required: true
+    securitySchemes:
+        app_key:
+            type: apiKey
+            description: >-
+                The Wordtracker Keyword API requires the `app_id` and `app_key` parameters in order to perform
+                authorization. Authentication parameters must be present in the query string only, regardless
+                of request method. To obtain these please sign up at https://wordtracker.3scale.net
+            name: app_key
+            in: header
+        app_id:
+            type: apiKey
+            description: >-
+                The Wordtracker Keyword API requires the `app_id` and `app_key` parameters in order to perform
+                authorization. Authentication parameters must be present in the query string only, regardless
+                of request method. To obtain these please sign up at https://wordtracker.3scale.net
+            name: app_id
+            in: header
 security:
-- app_key: []
-  app_id: []
+    -
+        app_key: []
+        app_id: []
