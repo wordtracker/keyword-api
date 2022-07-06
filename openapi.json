@@ -301,7 +301,7 @@
       },
       "country_code": {
         "name": "country_code",
-        "description": "Specifies the territory to search within. Two letter ISO 3166-2 country code or `GL` for global.\n`US` is United States and `GB` is Great Britain (United Kingdom). Default: `US`.",
+        "description": "Specifies the territory to search within. Please use a two letter ISO 3166-2 country code. e.g. `US` is United States and `GB` is Great Britain (United Kingdom). Default: `US`.",
         "schema": {
           "enum": [
             "AD",
