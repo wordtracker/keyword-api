@@ -3,7 +3,7 @@ info:
     title: Wordtracker Keyword API
     version: '3.0'
     description: >
-        *First release: 06.06.22, last API release: 06.06.22, last API docs release: 06.06.22*
+        *First release: 06.06.22, last API release: 06.06.22, last API docs release: 13.03.25*
 
         ## Introduction
 
@@ -29,20 +29,18 @@ info:
 
         ## Get going in 10 minutes!
 
-        First [register for an API account](https://wordtracker.3scale.net) (30 day free trial available). You
-        can then find the production ready Wordtracker Keyword API 2.0 server at:
-        https://api.lc.wordtracker.com
+        First [register for an API account](https://wordtracker.3scale.net) (30 day free trial available). You can then find the production ready Wordtracker Keyword API 3.0 server at:
+        https://api.wordtracker.com
 
 
         Please make sure you add the `app_id` and `app_key` as authorisation.
 
         Here's an example [REST
-        url](https://api.lc.wordtracker.com/v3/search?engine=google&country=us&seeds=dog&limit=10&type=broad&app_id=your_app_id&app_key=your_key)
+        url](https://api.wordtracker.com/v3/keywords/search?engine=google&country=us&seeds=dog&limit=10&type=broad&app_id=your_app_id&app_key=your_key)
         to query the /search method.
 
 
-        Please note: If the above url does not work, please check the version e.g. /v3. You can also see the
-        latest calls at https://api.lc.wordtracker.com.
+        Please note: If the above url does not work, please check the version e.g. /v3. You can also see the latest calls at https://api.wordtracker.com.
 
         ### Please choose from these options
 
@@ -133,7 +131,7 @@ info:
         backgroundColor: '#5195E9'
 servers:
     -
-        url: 'https://api.lc.wordtracker.com/v3'
+        url: 'https://api.wordtracker.com/v3'
         description: Production server
 paths:
     /search:

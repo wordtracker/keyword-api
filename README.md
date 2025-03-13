@@ -1,5 +1,7 @@
-# Wordtracker Keyword API 2.0 Docs | OpenAPI Specification
+# Wordtracker Keyword API 3.0 Docs | OpenAPI Specification
+
 [![Build Status](https://travis-ci.com/wordtracker/keyword-api.svg?branch=master)](https://travis-ci.com/wordtracker/keyword-api)
+
 ## Steps to finish
 
 1. Enable [Travis](https://docs.travis-ci.com/user/getting-started/#To-get-started-with-Travis-CI%3A) for your repository (**note**: you already have `.travis.yml` file)
@@ -20,6 +22,7 @@
 **Warning:** All above links are updated only after Travis CI finishes deployment
 
 ## Working on specification
+
 ### Install
 
 1. Install [Node JS](https://nodejs.org/)
@@ -28,13 +31,17 @@
 ### Usage
 
 #### `npm start`
+
 Starts the development server.
 
 #### `npm run build`
+
 Bundles the spec and prepares web_deploy folder with static assets.
 
 #### `npm test`
+
 Validates the spec.
 
 #### `npm run gh-pages`
+
 Deploys docs to GitHub Pages. You don't need to run it manually if you have Travis CI configured.
