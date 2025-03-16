@@ -3,7 +3,7 @@ info:
   title: Wordtracker Keyword API
   version: '3.0'
   description: |
-    *First release: 06.06.22, last API release: 06.06.22, last API docs release: 06.06.22*
+    *First release: 06.06.22, last API release: 06.06.22, last API docs release: 13.03.25*
     ## Introduction
 
     ### Google keywords with raw clickstream for more accurate search volumes
@@ -13,12 +13,12 @@ info:
     We have search volumes for 240 countries. For the full list please see this spreadsheet [Wordtracker keyword API | Countries](https://docs.google.com/spreadsheets/d/1GCMXn_l4K5QYg8ijj9Asb9iPtvaep1TmAL2MKwhQIIw/edit#gid=267834601).
 
     ## Get going in 10 minutes!
-    First [register for an API account](https://wordtracker.3scale.net) (30 day free trial available). You can then find the production ready Wordtracker Keyword API 2.0 server at: https://api.lc.wordtracker.com
+    First [register for an API account](https://wordtracker.3scale.net) (30 day free trial available). You can then find the production ready Wordtracker Keyword API 3.0 server at: https://api.wordtracker.com
 
     Please make sure you add the `app_id` and `app_key` as authorisation.
-    Here's an example [REST url](https://api.lc.wordtracker.com/v3/search?engine=google&country=us&seeds=dog&limit=10&type=broad&app_id=your_app_id&app_key=your_key) to query the /search method.
+    Here's an example [REST url](https://api.wordtracker.com/v3/keywords/search?engine=google&country=us&seeds=dog&limit=10&type=broad&app_id=your_app_id&app_key=your_key) to query the /search method.
 
-    Please note: If the above url does not work, please check the version e.g. /v3. You can also see the latest calls at https://api.lc.wordtracker.com.
+    Please note: If the above url does not work, please check the version e.g. /v3. You can also see the latest calls at https://api.wordtracker.com.
     ### Please choose from these options
     * [Register for an API account (30 day free trial available)](https://wordtracker.3scale.net)
     * [API pricing](http://www.wordtracker.com/api)
@@ -63,7 +63,7 @@ info:
     url: 'https://s3.amazonaws.com/wordtracker-front-end-assets/images/wordtracker-logo-transparent.png'
     backgroundColor: '#5195E9'
 servers:
-  - url: 'https://api.lc.wordtracker.com/v3'
+  - url: 'https://api.wordtracker.com/v3'
     description: Production server
 paths:
   /search:
@@ -240,21 +240,20 @@ components:
       required: true
     country_code:
       name: country_code
-      description: |-
-        Specifies the territory to search within. Two letter ISO 3166-2 country code or `GL` for global.
-        `US` is United States and `GB` is Great Britain (United Kingdom). Default: `US`.
+      description: 'Specifies the territory to search within. Please use a two letter ISO 3166-2 country code. e.g. `US` is United States and `GB` is Great Britain (United Kingdom). Default: `US`.'
       schema:
         enum:
-          - GL
-          - US
           - AD
           - AE
           - AF
           - AG
+          - AI
           - AL
           - AM
           - AO
+          - AQ
           - AR
+          - AS
           - AT
           - AU
           - AW
@@ -263,41 +262,57 @@ components:
           - BB
           - BD
           - BE
+          - BF
           - BG
           - BH
+          - BI
           - BJ
+          - BM
           - BN
           - BO
+          - BQ
           - BR
           - BS
+          - BT
+          - BV
           - BW
           - BY
           - BZ
           - CA
+          - CC
           - CD
+          - CF
+          - CG
           - CH
           - CI
+          - CK
           - CL
           - CM
           - CN
           - CO
           - CR
-          - CU
           - CV
           - CW
+          - CX
           - CY
           - CZ
           - DE
+          - DJ
           - DK
+          - DM
           - DO
           - DZ
           - EC
           - EE
           - EG
+          - EH
+          - ER
           - ES
           - ET
           - FI
           - FJ
+          - FK
+          - FM
           - FO
           - FR
           - GA
@@ -305,14 +320,22 @@ components:
           - GD
           - GE
           - GF
+          - GG
           - GH
           - GI
+          - GL
+          - GM
+          - GN
           - GP
+          - GQ
           - GR
+          - GS
           - GT
           - GU
+          - GW
           - GY
           - HK
+          - HM
           - HN
           - HR
           - HT
@@ -321,16 +344,19 @@ components:
           - IE
           - IL
           - IN
+          - IO
           - IQ
-          - IR
           - IS
           - IT
+          - JE
           - JM
           - JO
           - JP
           - KE
           - KG
           - KH
+          - KI
+          - KM
           - KN
           - KR
           - KW
@@ -339,7 +365,10 @@ components:
           - LA
           - LB
           - LC
+          - LI
           - LK
+          - LR
+          - LS
           - LT
           - LU
           - LV
@@ -349,34 +378,49 @@ components:
           - MD
           - ME
           - MG
+          - MH
           - MK
+          - ML
           - MM
           - MN
+          - MO
+          - MP
           - MQ
+          - MR
+          - MS
           - MT
           - MU
           - MV
+          - MW
           - MX
           - MY
           - MZ
           - NA
           - NC
+          - NE
+          - NF
           - NG
           - NI
           - NL
           - 'NO'
           - NP
+          - NR
+          - NU
           - NZ
           - OM
           - PA
           - PE
           - PF
+          - PG
           - PH
           - PK
           - PL
+          - PM
+          - PN
           - PR
           - PS
           - PT
+          - PW
           - PY
           - QA
           - RE
@@ -385,29 +429,54 @@ components:
           - RU
           - RW
           - SA
+          - SB
+          - SC
           - SE
           - SG
+          - SH
           - SI
+          - SJ
           - SK
+          - SL
+          - SM
           - SN
+          - SO
           - SR
+          - ST
           - SV
+          - SX
+          - SZ
+          - TC
+          - TD
+          - TF
           - TG
           - TH
           - TJ
+          - TK
+          - TL
+          - TM
           - TN
+          - TO
           - TR
           - TT
+          - TV
           - TW
           - TZ
           - UA
           - UG
+          - UM
+          - US
           - UY
           - UZ
+          - VA
           - VC
           - VE
+          - VG
           - VI
           - VN
+          - VU
+          - WF
+          - WS
           - XK
           - YE
           - YT
